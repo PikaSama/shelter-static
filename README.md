@@ -1,2 +1,2 @@
-# shelter-images
-Blog images.
+# shelter-resources
+Blog images and static files.
