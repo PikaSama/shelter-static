@@ -1,4 +1,4 @@
-//来源于主题Ayer https://shen-yu.gitee.io/2019/ayer/
+//脚本来源于主题Ayer https://shen-yu.gitee.io/2019/ayer/
 function wait(callback, seconds) {
     var timelag = null;
     timelag = window.setTimeout(callback, seconds);
@@ -10,7 +10,6 @@ function wait(callback, seconds) {
       copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
       copyHtml += '</button>';
       $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
       var clipboard = new ClipboardJS('.btn-copy', {
         target: function(trigger) {
           return trigger.nextElementSibling;
