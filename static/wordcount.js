@@ -21,10 +21,6 @@ setTimeout(function (){
     var reward = document.querySelector("is-k").innerText.length;
     //重新计算字数(正文内容)
     words = words - meting - copyright - reward;
-    console.log(meting);
-    console.log(copyright);
-    console.log(reward);
-    console.log(words);
     //估算阅读时间(假设每分钟阅读400字，阅读图片10张)，保留一位小数，字数范围为words，copyright和reward(整篇文章)
     var readtime = (Math.round((words + copyright + reward) / 40) + imgs) / 10 + '分';
     //字数超1000单位改为k，不显示具体字数，不超显示具体字数
