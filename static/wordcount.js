@@ -1,7 +1,7 @@
 //脚本来源： https://wardzhou.art
 //根据hexo-wordcount修改
-//加载提示
-window.onload = function() {
+//0.1秒后显示加载提示
+setTimeout(function (){
     var loading = $("[class='φgj φo']");
     loading.append('<span class="load_wordcount">Loading...</span>');
     //1秒后加载
@@ -55,16 +55,16 @@ window.onload = function() {
         }
         //debug
         //console.log(words);
-        console.log(meting);
+        //console.log(meting);
         //console.log(reward);
         //console.log(copyright);
         //console.log(readtime);
         //删除元素
-        $("[class='load_wordcount']").remove()
+        $("[class='load_wordcount']").remove();
         //将含有class=φgj φo的元素赋值到countplace
         var countplace = $("[class='φgj φo']");
         //插入元素
         countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
         countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
     },1000);
-}
+},100);
