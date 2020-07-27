@@ -152,9 +152,3 @@ class Circle {
   
   const cursorSpecialEffects = new CursorSpecialEffects()
   cursorSpecialEffects.init()
-
-//0.5秒后加载
-setTimeout(function(){
-  var canvasplace = $("[class='φbm φv']");
-  canvasplace.append('<canvas width="1777"height="841"style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>');
-},500);
