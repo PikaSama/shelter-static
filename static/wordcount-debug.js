@@ -103,7 +103,7 @@ setTimeout(function (){
         countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
         //判断文章是否有代码块，有则插入元素
         if (codes.length > 0) {
-            countplace.append('<span class="codes"><i class="ri-code-box-line"></i>' + code + '</span>');
+            countplace.append('<span class="codes">&nbsp;&nbsp;<i class="ri-code-box-line"></i>' + code + '</span>');
         }
         countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
     },1000);
