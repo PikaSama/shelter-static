@@ -150,3 +150,9 @@ document.addEventListener(
 
 setCanvasSize();
 window.addEventListener("resize", setCanvasSize, false);
+
+//0.5秒后加载
+setTimeout(function(){
+    var canvasplace = $("[class='φbm φv']");
+    canvasplace.append('<canvas class="fireworks"></canvas><style>.fireworks{position:fixed;left:0;top:0;z-index:99999;pointer-events:none}</style>');
+},500);
