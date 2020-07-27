@@ -84,12 +84,27 @@ setTimeout(function (){
         else {
             readtime = '≈ 1 min';
         }
+        //判断文章是否有代码块
+        if (codes.length > 0) {
+            //代码字符数超1000，显示估计字符数，不超显示具体字符数
+            if (code < 1000) {
+                code = '= ' + code + ' chars'; 
+            }
+            //估计代码字符数，单位k，保留一位小数
+            else {
+                code = '≈ ' + Math.round(code / 100) / 10 + 'k' + ' chars';
+            }
+        }
         //删除元素
         $("[class='load_wordcount']").remove();
         //将含有class=φgj φo的元素赋值到countplace
         var countplace = $("[class='φgj φo']");
         //插入元素
         countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
+        //判断文章是否有代码块，有则插入元素
+        if (codes.length > 0) {
+            countplace.append('<span class="codes"><i class="ri-code-box-line"></i>' + code + '</span>');
+        }
         countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
     },1000);
 },100);
