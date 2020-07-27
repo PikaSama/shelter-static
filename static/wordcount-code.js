@@ -84,7 +84,7 @@ setTimeout(function (){
         if (words < 1000) {
             //判断是否有代码块
             if (codes.length > 0) {
-                words = '= ' + words + ' words' + '(<i class="ri-edit-2-line"></i>' + code + ')';
+                words = '= ' + words + ' words' + ' (<i class="ri-code-box-line"></i>' + code + ')';
             }
             else {
                 words = '= ' + words + ' words';
@@ -94,7 +94,7 @@ setTimeout(function (){
         else {
             //判断是否有代码块
             if (codes.length > 0) {
-                words = '≈ ' + Math.round(words / 100) / 10 + 'k' + ' words' + '(<i class="ri-edit-2-line"></i>' + code + ')';
+                words = '≈ ' + Math.round(words / 100) / 10 + 'k' + ' words' + ' (<i class="ri-code-box-line"></i>' + code + ')';
             }
             else {
                 words = '≈ ' + Math.round(words / 100) / 10 + 'k' + ' words';
@@ -112,7 +112,7 @@ setTimeout(function (){
         //将含有class=φgj φo的元素赋值到countplace
         var countplace = $("[class='φgj φo']");
         //插入元素
-        countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
+        countplace.append('<span class="words"><i class="ri-edit-2-line"></i>' + words + '</span>');
         countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
     },1000);
 },100);
