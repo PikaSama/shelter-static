@@ -31,19 +31,21 @@ setTimeout(function (){
             type : 'error',
             // if the user doesn´t close the notification then we remove it 
             // after the following time
-            ttl : 6000,
+            ttl : 10000,
             // callbacks
             onClose : function() { return false; },
             onOpen : function() { return false; }
             });
             notification.show();
         },4000);
-        //循环检测页面路径是否为帮助页面
-        for (; lc != "/help"; ) {
-            setTimeout(function () {
-                lc = window.location.pathname;
-            },3000);
-        }
-        docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
+        //每2秒检测一次页面路径，如果是帮助页面则赋予“已读”状态至cookie
+        setInterval(function (){
+            lc = window.location.pathname;
+            if (lc == "/help") {
+                docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
+                //清除计时器
+                clearInterval(3);
+            }
+        },2000);
     }
 },1000);
