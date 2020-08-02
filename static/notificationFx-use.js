@@ -5,15 +5,15 @@ setTimeout(function (){
     // defaults to the document.body
     wrapper : document.body,
     // the message
-    message : '<p>第一次访问博客？来看看&nbsp;<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~<br />(浏览后即可永久关闭此通知)</p>',
+    message : '<div class="ns-thumb"><img height="64px" width="64px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div class="ns-content"><p>第一次访问博客？来看看&nbsp;<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~&nbsp;(浏览后即可永久关闭此通知)</p></div>',
     // layout type: growl|attached|bar|other
-    layout : 'growl',
+    layout : 'other',
     // effects for the specified layout:
     // for growl layout: scale|slide|genie|jelly
     // for attached layout: flip|bouncyflip
     // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
     // ...
-    effect : 'jelly',
+    effect : 'thumbslider',
     // notice, warning, error, success
     // will add class ns-type-warning, ns-type-error or ns-type-success
     type : 'error',
