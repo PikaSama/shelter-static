@@ -5,7 +5,7 @@ setTimeout(function (){
     // defaults to the document.body
     wrapper : document.body,
     // the message
-    message : '<div class="ns-thumb"><img height="64px" width="64px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div class="ns-content"><p>第一次访问博客？来看看&nbsp;<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~&nbsp;(浏览后即可永久关闭此通知)</p></div>',
+    message : '<div class="ns-thumb"><img height="64px" width="64px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div class="ns-content"><p>第一次访问博客？来看看博客的&nbsp;<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~&nbsp;移动端点击右下角的功能菜单可以切换到侧边栏&nbsp;(浏览后即可永久关闭此通知)</p></div>',
     // layout type: growl|attached|bar|other
     layout : 'other',
     // effects for the specified layout:
@@ -19,7 +19,7 @@ setTimeout(function (){
     type : 'error',
     // if the user doesn´t close the notification then we remove it 
     // after the following time
-    ttl : 10000,
+    ttl : 6000,
     // callbacks
     onClose : function() { return false; },
     onOpen : function() { return false; }
