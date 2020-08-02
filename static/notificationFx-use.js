@@ -19,10 +19,10 @@ setTimeout(function (){
     type : 'error',
     // if the user doesn´t close the notification then we remove it 
     // after the following time
-    ttl : 6000,
+    ttl : 10000,
     // callbacks
     onClose : function() { return false; },
     onOpen : function() { return false; }
     });
     notification.show();
-},6000);
+},5000);

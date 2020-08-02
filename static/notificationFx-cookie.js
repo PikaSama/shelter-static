@@ -1,7 +1,15 @@
+//1秒后加载
 setTimeout(function (){
-    var ck = docCookies.hasItem("newbie");
+    //获取当前页面路径
     var lc = window.location.pathname;
+    //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
+    if(lc == "/help") {
+        docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
+    }
+    //如果是其他页面，则显示通知
+    var ck = docCookies.hasItem("newbie");
     if (ck == false) {
+        //4秒后加载
         setTimeout(function (){
             // create the notification
             var notification = new NotificationFx({
@@ -23,15 +31,17 @@ setTimeout(function (){
             type : 'error',
             // if the user doesn´t close the notification then we remove it 
             // after the following time
-            ttl : 6000,
+            ttl : 10000,
             // callbacks
             onClose : function() { return false; },
             onOpen : function() { return false; }
             });
             notification.show();
-        },5000);
-    }
-    if (lc == "/help") {
-        docCookies.setItem("newbie", "1");
+        },4000);
+        //循环检测页面路径是否为帮助页面
+        for (; lc != "/help"; ) {
+            lc = window.location.pathname;
+        }
+        docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
     }
 },1000);
