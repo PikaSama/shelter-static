@@ -1,7 +1,7 @@
 setTimeout(function (){
     var ck = docCookies.hasItem("newbie");
     var lc = window.location.pathname;
-    if (ck = false) {
+    if (ck == false) {
         setTimeout(function (){
             // create the notification
             var notification = new NotificationFx({
