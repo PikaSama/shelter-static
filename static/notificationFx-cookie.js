@@ -1,7 +1,7 @@
 //1秒后加载
 setTimeout(function (){
     //静态资源的版本
-    var ver = "1.3.6.1";
+    var ver = "1.3.6.2";
     //插入css的地方
     var cssPlace = $("head");
     //声明页面路径变量
