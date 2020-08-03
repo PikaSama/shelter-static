@@ -6,29 +6,35 @@ setTimeout(function (){
     var cssPlace = $("head");
     //声明页面路径变量
     var lc;
+    //声明cookie变量
+    var ck;
+    //检测cookie(判断是否阅读最新公告)
+    var ad = docCookies.getItem("announcement_date");
+    //设置公告最新日期
+    var ld = "2020.8.3";
     //定义检测帮助页面的函数
     function findHelp (){
-        //获取当前页面路径
-        lc = window.location.pathname;
-        //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
-        if(lc == "/help") {
-            docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
-            //cookie更新，重新赋值
+        function recycleHelp (){
+            lc = window.location.pathname;
+            //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
+            if(lc == "/help") {
+                docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
+                //cookie更新，重新赋值
+                ck = docCookies.hasItem("newbie");
+                //间接访问帮助页面，清除计时器
+                clearInterval(itv);
+                //执行一次checkAnnounce函数，为转正的新人显示公告
+                checkAnnounce();
+            }
+        }
+        recycleHelp();
+        if (lc != "/help") {
             ck = docCookies.hasItem("newbie");
-            //间接访问帮助页面，清除计时器
-            clearInterval(itv);
-            //执行一次checkAnnounce函数，为转正的新人显示公告
             checkAnnounce();
         }
     }
     //执行一次findHelp函数，判断首次连接的页面是否为帮助页面，如果是则写入cookie
     findHelp();
-    //检测cookie(判断是否为新人)
-    var ck = docCookies.hasItem("newbie");
-    //检测cookie(判断是否阅读最新公告)
-    var ad = docCookies.getItem("announcement_date");
-    //设置公告最新日期
-    var ld = "2020.8.3";
     //定义检测是否阅读最新公告的函数
     //公告设置为非萌新可见
     function checkAnnounce (){
@@ -54,7 +60,7 @@ setTimeout(function (){
                 // for attached layout: flip|bouncyflip
                 // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
                 // ...
-                effect : 'genie',
+                effect : 'slide',
                 // notice, warning, error, success
                 // will add class ns-type-warning, ns-type-error or ns-type-success
                 type : 'error',
@@ -70,7 +76,6 @@ setTimeout(function (){
             confirmAnnounce();
         }
     }
-    checkAnnounce();
     //声明锚点变量
     var maodian;
     //定义锚点检测的函数
@@ -123,9 +128,9 @@ setTimeout(function (){
             });
             notification.show();
         },3000);
-        //每秒执行一次findHelp函数，检测一次页面路径，如果是帮助页面则赋予“已读”状态至cookie
+        //每秒执行一次recycleHelp函数，检测一次页面路径，如果是帮助页面则赋予“已读”状态至cookie
         var itv = setInterval(function (){
-            findHelp();
+            recycleHelp();
         },1000);
     }
 },1000);
