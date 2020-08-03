@@ -396,13 +396,22 @@
 .ns-effect-genie {
 	top: auto;
 	bottom: 30px;
-	background: #1c2e2d;
+	background: rgba(150,210,240,0.9);
 	box-shadow: 0 7px 6px rgba(0,0,0,0.2), 2px 4px 6px rgba(0,0,0,0.5);
+	font-weight: 600;
 }
 
+.ns-effect-genie a {
+	color: 	#1E90FF;
+}
+
+.ns-effect-genie a:hover,
+.ns-effect-genie a:focus {
+	color: #fff;
+}
 .ns-effect-genie .ns-close::after,
 .ns-effect-genie .ns-close::before {
-	background: #0eada0;
+	background: #5699bc;
 }
 
 .ns-effect-genie .ns-close:hover::after,

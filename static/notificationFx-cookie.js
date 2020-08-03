@@ -1,7 +1,7 @@
 //1秒后加载
 setTimeout(function (){
     //静态资源的版本
-    var ver = "1.3.6-mu";
+    var ver = "1.3.6";
     //插入css的地方
     var cssPlace = $("head");
     //声明页面路径变量
@@ -39,7 +39,7 @@ setTimeout(function (){
     //公告设置为非萌新可见
     function checkAnnounce (){
         if ((ad == null || ad != ld) && ck == true) {
-            //卸载css，删除未消失的新人通知
+            //卸载css，删除新人通知
             $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error").remove();
             $("link#thumbslider").remove();
             //装载css
@@ -52,7 +52,7 @@ setTimeout(function (){
                 // defaults to the document.body
                 wrapper : document.body,
                 // the message
-                message : '<p>[公告]叮咚，博客有文章更新啦~<br /><a href="/inside-configuration">Inside主题进阶配置</a><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#cofirmedAnnouncement">确认公告</a></p>',
+                message : '<p>[公告]叮咚！博客有文章更新啦~<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#cofirmedAnnouncement">确认公告</a></p>',
                 // layout type: growl|attached|bar|other
                 layout : 'growl',
                 // effects for the specified layout:
@@ -60,7 +60,7 @@ setTimeout(function (){
                 // for attached layout: flip|bouncyflip
                 // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
                 // ...
-                effect : 'slide',
+                effect : 'genie',
                 // notice, warning, error, success
                 // will add class ns-type-warning, ns-type-error or ns-type-success
                 type : 'error',
