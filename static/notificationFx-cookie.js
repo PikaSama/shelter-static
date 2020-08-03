@@ -14,22 +14,24 @@ setTimeout(function (){
     var ld = "2020.8.3";
     //定义检测帮助页面的函数
     function findHelp (){
-        function recycleHelp (){
-            lc = window.location.pathname;
-            //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
-            if(lc == "/help") {
-                docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
-                //cookie更新，重新赋值
-                ck = docCookies.hasItem("newbie");
-                //间接访问帮助页面，清除计时器
-                clearInterval(itv);
-                //执行一次checkAnnounce函数，为转正的新人显示公告
-                checkAnnounce();
-            }
-        }
+        //加载recycleHelp函数
         recycleHelp();
         if (lc != "/help") {
             ck = docCookies.hasItem("newbie");
+            checkAnnounce();
+        }
+    }
+    //定义循环检测帮助页面的函数
+    function recycleHelp (){
+        lc = window.location.pathname;
+        //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
+        if(lc == "/help") {
+            docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
+            //cookie更新，重新赋值
+            ck = docCookies.hasItem("newbie");
+            //间接访问帮助页面，清除计时器
+            clearInterval(itv);
+            //执行一次checkAnnounce函数，为转正的新人显示公告
             checkAnnounce();
         }
     }
