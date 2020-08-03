@@ -85,7 +85,7 @@ setTimeout(function (){
             maodian = window.location.hash;
             if (maodian == "#cofirmedAnnouncement") {
                 //锚点变化，模拟点击事件，写入cookie
-                $(".ns-box.ns-growl.ns-effect-slide.ns-type-error.ns-show .ns-close").click();
+                $(".ns-box.ns-growl.ns-effect-jelly.ns-type-error.ns-show .ns-close").click();
                 docCookies.setItem("announcement_date", ld, Infinity, "/", "shelter.beaa.cn", true);
                 //清除计时器
                 clearInterval(itv2);
