@@ -1,5 +1,9 @@
 //1秒后加载
 setTimeout(function (){
+    //静态资源的版本
+    var ver = "1.3.6-lambda";
+    //插入css的地方
+    var cssPlace = $("head");
     //声明页面路径变量
     var lc;
     //定义检测帮助页面的函数
@@ -29,6 +33,11 @@ setTimeout(function (){
     //公告设置为非萌新可见
     function checkAnnounce (){
         if ((ad == null || ad != ld) && ck == true) {
+            //卸载css，删除未消失的新人通知
+            $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error").remove();
+            $("link#thumbslider").remove();
+            //装载css
+            cssPlace.append('<link id="slide" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
             setTimeout(function (){
                 // create the notification
                 var announcement = new NotificationFx({
@@ -50,13 +59,13 @@ setTimeout(function (){
                 type : 'error',
                 // if the user doesn´t close the notification then we remove it 
                 // after the following time
-                ttl : 8000,
+                ttl : 10000,
                 // callbacks
                 onClose : function() { return false; },
                 onOpen : function() { return false; }
                 });
                 announcement.show();
-            },1000);
+            },2000);
             confirmAnnounce();
         }
     }
@@ -79,10 +88,11 @@ setTimeout(function (){
         //8秒后清除计时器
         setTimeout(function (){
             clearInterval(itv2);
-        },8000);
+        },10000);
     }
     //如果是新人，显示通知
     if (ck == false) {
+        cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
         //3秒后加载
         setTimeout(function (){
             // create the notification
@@ -105,13 +115,13 @@ setTimeout(function (){
             type : 'error',
             // if the user doesn´t close the notification then we remove it 
             // after the following time
-            ttl : 8000,
+            ttl : 10000,
             // callbacks
             onClose : function() { return false; },
             onOpen : function() { return false; }
             });
             notification.show();
-        },3000);
+        },4000);
         //每秒执行一次findHelp函数，检测一次页面路径，如果是帮助页面则赋予“已读”状态至cookie
         var itv = setInterval(function (){
             findHelp();
