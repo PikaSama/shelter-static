@@ -50,7 +50,7 @@ setTimeout(function (){
                 type : 'error',
                 // if the user doesn´t close the notification then we remove it 
                 // after the following time
-                ttl : 10000,
+                ttl : 8000,
                 // callbacks
                 onClose : function() { return false; },
                 onOpen : function() { return false; }
@@ -76,14 +76,14 @@ setTimeout(function (){
                 clearInterval(itv2);
             }
         },1000);
-        //10秒后清除计时器
+        //8秒后清除计时器
         setTimeout(function (){
             clearInterval(itv2);
-        },10000);
+        },8000);
     }
     //如果是新人，显示通知
     if (ck == false) {
-        //4秒后加载
+        //3秒后加载
         setTimeout(function (){
             // create the notification
             var notification = new NotificationFx({
@@ -105,13 +105,13 @@ setTimeout(function (){
             type : 'error',
             // if the user doesn´t close the notification then we remove it 
             // after the following time
-            ttl : 10000,
+            ttl : 8000,
             // callbacks
             onClose : function() { return false; },
             onOpen : function() { return false; }
             });
             notification.show();
-        },4000);
+        },3000);
         //每秒执行一次findHelp函数，检测一次页面路径，如果是帮助页面则赋予“已读”状态至cookie
         var itv = setInterval(function (){
             findHelp();
