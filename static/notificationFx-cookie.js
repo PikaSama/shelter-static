@@ -4,7 +4,7 @@ setTimeout(function (){
     var lc = window.location.pathname;
     //如果是帮助页面(链接直连)，直接赋予“已读”状态至cookie
     if(lc == "/help") {
-        docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
+        docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
     }
     //如果是其他页面，则显示通知
     var ck = docCookies.hasItem("newbie");
@@ -17,7 +17,7 @@ setTimeout(function (){
             // defaults to the document.body
             wrapper : document.body,
             // the message
-            message : '<div class="ns-thumb"><img height="64px" width="64px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div class="ns-content"><p>第一次访问博客？来看看博客的&nbsp;<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~&nbsp;移动端点击右下角的功能菜单可以切换到侧边栏&nbsp;(浏览后即可永久关闭此通知)</p></div>',
+            message : '<div class="ns-thumb"><img height="64px" width="64px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div style="width:400px;" class="ns-content"><p>第一次访问博客？来看看博客的&nbsp;<a style="color:#1eb4f0;" href="/help">使用教程</a>&nbsp;叭~&nbsp;移动端点击右下角的功能菜单可以切换到侧边栏&nbsp;(浏览后即可永久关闭此通知)</p></div>',
             // layout type: growl|attached|bar|other
             layout : 'other',
             // effects for the specified layout:
@@ -42,7 +42,7 @@ setTimeout(function (){
         setInterval(function (){
             lc = window.location.pathname;
             if (lc == "/help") {
-                docCookies.setItem("newbie", "1", Infinity, "/", "shelter.beaa.cn", true);
+                docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
                 //清除计时器
                 clearInterval(3);
             }

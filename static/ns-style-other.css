@@ -1,3 +1,7 @@
+div {
+	white-space: normal;
+	word-wrap: break-word;
+}
 .notification-shape {
 	position: fixed;
 	z-index: 1000;
@@ -398,7 +402,7 @@
 	font-weight: bold;
 	padding: 0 40px 0 80px;
 	height: 64px;
-	line-height: 60px;
+	line-height: 30px;
 }
 
 .ns-effect-thumbslider.ns-show .ns-content,
