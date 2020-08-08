@@ -1,4 +1,4 @@
-//脚本来源于主题Ayer https://shen-yu.gitee.io/2019/ayer/
+// 脚本来源于主题Ayer https://shen-yu.gitee.io/2019/ayer/
 function wait(callback, seconds) {
     var timelag = null;
     timelag = window.setTimeout(callback, seconds);

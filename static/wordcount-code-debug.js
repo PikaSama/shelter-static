@@ -50,15 +50,15 @@ setTimeout(function (){
         // debug
         console.log(code);
         // ---
-        // 校正字数，正文字数 - 音乐插件字数 - 代码字符数
-        words = words - meting - code;
+        // 校正字数，正文字数 - 音乐插件字数
+        words = words - meting;
         // debug
         console.log(words);
         // ---
         // 估算阅读时间，范围：全文
         // 设每分钟阅读文字600字 / 代码800字符 / 图片10张
         // 结果保留一位小数
-        var readtime = (Math.round((words + copyright + reward) / 60 + code / 80) + imgs) / 10;
+        var readtime = (Math.round((words - code) / 60 + code / 80) + imgs) / 10;
         // 如果字数不到1000，显示原字数
         if (words < 1000) {
             words = '= ' + words + ' words';
@@ -80,24 +80,21 @@ setTimeout(function (){
             // 是
             // 如果代码字符数不到1000，显示原字符数
             if (code < 1000) {
-                code = '= ' + code + ' chars'; 
+                code = '= ' + code + ' chars';
             }
             // 如果代码字符数≥1000，四舍五入字符数，单位改为k，结果保留一位小数
             else {
                 code = '≈ ' + Math.round(code / 100) / 10 + 'k' + ' chars';
             }
+            // 添加代码统计至字数统计
+            words = words + '&nbsp;&nbsp;(<i class="ri-code-box-line"></i>' + code + ')';
         }
         // 删除加载提示
         $("[class='load_wordcount']").remove();
         // 文章信息位置
         var countplace = $("[class='φgj φo']");
         // 插入字数统计
-        countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
-        // 是否有代码
-        if (codes.length > 0) {
-            // 是，插入代码统计
-            countplace.append('<span class="codes">&nbsp;&nbsp;<i class="ri-code-box-line"></i>' + code + '</span>');
-        }
+        countplace.append('<span class="words"><i class="ri-edit-2-line"></i>' + words + '</span>');
         // 插入阅读时间
         countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
     },1000);
