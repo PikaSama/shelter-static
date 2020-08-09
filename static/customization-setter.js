@@ -7,7 +7,7 @@ setTimeout(function (){
     // 插入css的地方
     var insertCssPlace = $("head");
     // 静态资源版本
-    var staticVer = "1.3.8-beta";
+    var staticVer = "1.3.12";
     // 公告
     var jelly = ".ns-box.ns-growl.ns-effect-jelly.ns-type-error";
     // 新人标识

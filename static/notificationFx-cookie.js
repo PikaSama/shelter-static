@@ -8,7 +8,7 @@ setTimeout(function (){
     // 最新公告日期
     var ld = "2020.8.3";
     // 静态资源版本
-    var ver = "1.3.8";
+    var ver = "1.3.12";
     // 插入css的地方
     var cssPlace = $("head");
     // 非help页面，如果是新人，显示新人通知
@@ -21,8 +21,6 @@ setTimeout(function (){
     }
     // 新人通知
     function newbientf (){
-        // 新人通知位置
-        var thumbslider = $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner");
         cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
         setTimeout(function (){
             // create the notification
@@ -53,8 +51,8 @@ setTimeout(function (){
             notification.show();
             // 修改通知长度
             setTimeout(function (){
-                thumbslider.attr("style","width:340px;");
-            },500);
+                $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
+            },1000);
         },2000);
     }
     // 检查是否满足显示公告的条件

@@ -9,6 +9,8 @@ setTimeout(function (){
     var bodyInsert = $("body");
     // 调色盘位置
     var palette = document.querySelector("is-palette2");
+    // 静态资源版本
+    var ver = "1.3.12";
     // 一些需要全局使用的变量，先声明
     var theme;
     var autoNight;
@@ -38,11 +40,11 @@ setTimeout(function (){
     function checkUA (){
         // 移动端，加载移动端专用css
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
-            headInsert.append('<link href="//zorin.beaa.cn/test/radio-mobile.css" rel="stylesheet" />');
+            headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
         }
         // PC端，加载普通css
         else {
-            headInsert.append('<link href="//zorin.beaa.cn/test/radio.css" rel="stylesheet" />');
+            headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio.css" rel="stylesheet" />');
         }
     }
     checkUA();
@@ -55,7 +57,7 @@ setTimeout(function (){
         }
         // 不是，插入默认的内容
         else {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@latest/static/clickLove.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
@@ -114,14 +116,14 @@ setTimeout(function (){
         var clickeffect = docCookies.getItem("click_effect");
         // 判断选项，加载指定文件
         if (clickeffect == "0") {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@latest/static/clickLove.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
         }
         else if (clickeffect == "1") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>');
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@latest/static/cb1.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb1.js"></script>');
         }
         else if (clickeffect == "2") {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@latest/static/cb2.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
         }
         l2d();
     }

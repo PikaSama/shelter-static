@@ -54,7 +54,7 @@ setTimeout(function (){
         // 插入css的地方
         var cssPlace = $("head");
         // 静态资源文件版本
-        var ver = "1.3.8";
+        var ver = "1.3.12";
         cssPlace.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
         setTimeout(function (){
             // create the notification

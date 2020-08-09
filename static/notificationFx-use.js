@@ -1,4 +1,8 @@
 setTimeout(function (){
+    // 静态资源版本
+    var ver = "1.3.12";
+    // 插入css
+    $("head").append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
     // create the notification
     var notification = new NotificationFx({
     // element to which the notification will be appended
@@ -25,5 +29,8 @@ setTimeout(function (){
     onOpen : function() { return false; }
     });
     notification.show();
-    thumbslider.attr("style","width:380px;");
+    setTimeout(function (){
+        // 修改通知长度
+        $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
+    },1000);
 },2000);
