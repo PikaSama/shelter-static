@@ -7,6 +7,8 @@ setTimeout(function (){
     if (neo == false && locate == "/help") {
         // 写入新人标识
         docCookies.setItem("newbie", "0", Infinity, "/", "shelter.beaa.cn", true);
+        // 更新新人标识
+        neo = docCookies.hasItem("newbie");
         checkAnnounce();
     }
     // 在help页面，不是新人

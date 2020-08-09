@@ -21,6 +21,7 @@ setTimeout(function (){
     }
     // 新人通知
     function newbientf (){
+        // 新人通知位置
         var thumbslider = $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner");
         cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
         setTimeout(function (){
@@ -50,7 +51,10 @@ setTimeout(function (){
             onOpen : function() { return false; }
             });
             notification.show();
-            thumbslider.attr("style","width:380px;");
+            // 修改通知长度
+            setTimeout(function (){
+                thumbslider.attr("style","width:340px;");
+            },500);
         },2000);
     }
     // 检查是否满足显示公告的条件
