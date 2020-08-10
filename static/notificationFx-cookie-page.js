@@ -3,6 +3,8 @@ setTimeout(function (){
     var neo = docCookies.hasItem("newbie");
     // 页面路径
     var locate = window.location.pathname;
+    // 最新公告日期
+    var ld = "2020.8.3";
     // 在help页面，是新人
     if (neo == false && locate == "/help") {
         // 写入新人标识
@@ -19,8 +21,6 @@ setTimeout(function (){
     function checkAnnounce (){
         // 已读公告日期
         var ad = docCookies.getItem("announcement_date");
-        // 最新公告日期
-        var ld = "2020.8.3";
         // 新人通知
         var thumbslider = ".ns-box.ns-other.ns-effect-thumbslider.ns-type-error";
         // 无已读公告或已读公告日期与最新公告日期不符，且不是新人
@@ -84,7 +84,7 @@ setTimeout(function (){
             });
             announcement.show();
             confirmAnnounce();
-        },3000);
+        },2000);
     }
     // 确认公告按钮
     function confirmAnnounce (){

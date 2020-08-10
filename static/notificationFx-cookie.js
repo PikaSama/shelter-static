@@ -52,7 +52,7 @@ setTimeout(function (){
             // 修改通知长度
             setTimeout(function (){
                 $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
-            },1000);
+            },600);
         },2000);
     }
     // 检查是否满足显示公告的条件
@@ -93,7 +93,7 @@ setTimeout(function (){
             });
             announcement.show();
             confirmAnnounce();
-        },1000);
+        },2000);
     }
     // 确认公告按钮
     function confirmAnnounce (){
