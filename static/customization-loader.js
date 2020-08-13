@@ -15,36 +15,38 @@ setTimeout(function (){
     var theme;
     var autoNight;
     var time;
+    // 监听主题点击事件函数，代码简化效率中等
+    function paletteListener (eq,mode){
+        if (mode == "day") {
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+                docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
+                $(".input-radio-night").attr("class","input-radio");
+            });
+        }
+        else {
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+                docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
+                $(".input-radio").attr("class","input-radio-night");
+            });
+        }
+    }
     // 监听调色盘五个主题的点击事件
-    palette.shadowRoot.querySelectorAll("a")[1].addEventListener("click", function (){
-        docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
-        $(".input-radio").attr("class","input-radio-night");
-    });
-    palette.shadowRoot.querySelectorAll("a")[0].addEventListener("click", function (){
-        docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
-        $(".input-radio-night").attr("class","input-radio");
-    });
-    palette.shadowRoot.querySelectorAll("a")[2].addEventListener("click", function (){
-        docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
-        $(".input-radio-night").attr("class","input-radio");
-    });
-    palette.shadowRoot.querySelectorAll("a")[3].addEventListener("click", function (){
-        docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
-        $(".input-radio-night").attr("class","input-radio");
-    });
-    palette.shadowRoot.querySelectorAll("a")[4].addEventListener("click", function (){
-        docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
-        $(".input-radio-night").attr("class","input-radio");
-    });
+    paletteListener(0,"day");
+    paletteListener(2,"day");
+    paletteListener(3,"day");
+    paletteListener(4,"day");
+    paletteListener(1,"night");
     // 检测UA
     function checkUA (){
         // 移动端，加载移动端专用css
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
-            headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
+            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
+            headInsert.append('<link href="//zorin.beaa.cn/test/radio-mobile.css" rel="stylesheet" />');
         }
         // PC端，加载普通css
         else {
-            headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio.css" rel="stylesheet" />');
+            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio.css" rel="stylesheet" />');
+            headInsert.append('<link href="//zorin.beaa.cn/test/radio.css" rel="stylesheet" />');
         }
     }
     checkUA();
@@ -136,4 +138,4 @@ setTimeout(function (){
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-},1000);
+},800);

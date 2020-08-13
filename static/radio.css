@@ -69,7 +69,7 @@
     background-color: grey;
     width: 50%;
     height: 32px;
-    margin: 0 auto;
+    margin: 1em auto;
     text-align: center;
     line-height: 32px;
     color: white;
@@ -108,7 +108,7 @@
     background-color: grey;
     width: 50%;
     height: 32px;
-    margin: 0 auto;
+    margin: 1em auto;
     text-align: center;
     line-height: 32px;
     color: white;
@@ -121,10 +121,12 @@
 .button-save-disabled span {
     position: relative;
 }
+
 .button-save-disabled i {
     position: absolute;
     opacity: 0;
 }
+
 .ns-box.ns-other.ns-effect-thumbslider.ns-type-error#canceled {
     opacity: 0;
     transition: all 0.3s;

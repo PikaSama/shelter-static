@@ -57,28 +57,13 @@ setTimeout(function (){
         var ver = "1.3.12";
         cssPlace.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
         setTimeout(function (){
-            // create the notification
             var announcement = new NotificationFx({
-                // element to which the notification will be appended
-                // defaults to the document.body
                 wrapper : document.body,
-                // the message
                 message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + locate + '#cofirmed">确认公告</a></p>',
-                // layout type: growl|attached|bar|other
                 layout : 'growl',
-                // effects for the specified layout:
-                // for growl layout: scale|slide|genie|jelly
-                // for attached layout: flip|bouncyflip
-                // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
-                // ...
                 effect : 'jelly',
-                // notice, warning, error, success
-                // will add class ns-type-warning, ns-type-error or ns-type-success
                 type : 'error',
-                // if the user doesn´t close the notification then we remove it 
-                // after the following time
                 ttl : 10000,
-                // callbacks
                 onClose : function() { return false; },
                 onOpen : function() { return false; }
             });

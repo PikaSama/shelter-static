@@ -23,30 +23,15 @@ setTimeout(function (){
     function newbientf (){
         cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
         setTimeout(function (){
-            // create the notification
             var notification = new NotificationFx({
-            // element to which the notification will be appended
-            // defaults to the document.body
-            wrapper : document.body,
-            // the message
-            message : '<div class="ns-thumb"><img height="72px" width="72px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div style="width:280px;" class="ns-content"><p>第一次访问博客？来看看<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~<br />移动端请点击右下角的圆点打开侧边栏“<span class="φbk icon-sidebar"></span>”<br />(浏览后即可永久关闭此通知)</p></div>',
-            // layout type: growl|attached|bar|other
-            layout : 'other',
-            // effects for the specified layout:
-            // for growl layout: scale|slide|genie|jelly
-            // for attached layout: flip|bouncyflip
-            // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
-            // ...
-            effect : 'thumbslider',
-            // notice, warning, error, success
-            // will add class ns-type-warning, ns-type-error or ns-type-success
-            type : 'error',
-            // if the user doesn´t close the notification then we remove it 
-            // after the following time
-            ttl : 10000,
-            // callbacks
-            onClose : function() { return false; },
-            onOpen : function() { return false; }
+                wrapper : document.body,
+                message : '<div class="ns-thumb"><img height="72px" width="72px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div style="width:280px;" class="ns-content"><p>第一次访问博客？来看看<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~<br />移动端请点击右下角的圆点打开侧边栏“<span class="φbk icon-sidebar"></span>”<br />(浏览后即可永久关闭此通知)</p></div>',
+                layout : 'other',
+                effect : 'thumbslider',
+                type : 'error',
+                ttl : 10000,
+                onClose : function() { return false; },
+                onOpen : function() { return false; }
             });
             notification.show();
             // 修改通知长度
@@ -66,28 +51,13 @@ setTimeout(function (){
     function announce (){
         cssPlace.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
         setTimeout(function (){
-            // create the notification
             var announcement = new NotificationFx({
-                // element to which the notification will be appended
-                // defaults to the document.body
                 wrapper : document.body,
-                // the message
                 message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + lc + '#cofirmed">确认公告</a></p>',
-                // layout type: growl|attached|bar|other
                 layout : 'growl',
-                // effects for the specified layout:
-                // for growl layout: scale|slide|genie|jelly
-                // for attached layout: flip|bouncyflip
-                // for other layout: boxspinner|cornerexpand|loadingcircle|thumbslider
-                // ...
                 effect : 'jelly',
-                // notice, warning, error, success
-                // will add class ns-type-warning, ns-type-error or ns-type-success
                 type : 'error',
-                // if the user doesn´t close the notification then we remove it 
-                // after the following time
                 ttl : 10000,
-                // callbacks
                 onClose : function() { return false; },
                 onOpen : function() { return false; }
             });
