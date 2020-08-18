@@ -4,7 +4,7 @@ setTimeout(function (){
     // 自定义配置文件标识
     var custom = docCookies.hasItem("custom");
     // 静态资源版本
-    var ver = "1.3.12";
+    var ver = "1.3.17";
     // 插入js的地方
     var bodyPlace = $("body");
     // 读取配置
