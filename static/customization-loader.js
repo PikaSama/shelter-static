@@ -11,6 +11,8 @@ setTimeout(function (){
     var palette = document.querySelector("is-palette2");
     // 静态资源版本
     var ver = "1.3.12";
+    // 读取侧边栏配置
+    var sidebar = docCookies.getItem("sidebar_widget_background");
     // 一些需要全局使用的变量，先声明
     var theme;
     var autoNight;
@@ -23,10 +25,15 @@ setTimeout(function (){
                 $(".input-radio-night").attr("class","input-radio");
             });
         }
-        else {
+        else if (mode == "night") {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
+            });
+        }
+        else if (mode == "accent") {
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+                sidebarB();
             });
         }
     }
@@ -36,6 +43,18 @@ setTimeout(function (){
     paletteListener(3,"day");
     paletteListener(4,"day");
     paletteListener(1,"night");
+    paletteListener(5,"accent");
+    paletteListener(6,"accent");
+    paletteListener(7,"accent");
+    paletteListener(8,"accent");
+    paletteListener(9,"accent");
+    paletteListener(10,"accent");
+    paletteListener(11,"accent");
+    paletteListener(12,"accent");
+    paletteListener(13,"accent");
+    paletteListener(14,"accent");
+    paletteListener(15,"accent");
+    paletteListener(16,"accent");
     // 检测UA
     function checkUA (){
         // 移动端，加载移动端专用css
@@ -92,13 +111,11 @@ setTimeout(function (){
             widget = widget + 4;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
-        sideBar();
+        sidebarB();
+        cEffect();
     }
     // 侧边栏背景
-    function sideBar (){
-        // 读取配置
-        var sidebar = docCookies.getItem("sidebar_widget_background");
-        // 如果设置为否
+    function sidebarB (){
         if (sidebar == "0") {
             // 是，进一步判断是否启用黑暗模式且处于工作时间
             if (autoNight == "1" && (time >= 19 || time <= 5)) {
@@ -110,7 +127,6 @@ setTimeout(function (){
                 palette.shadowRoot.querySelectorAll("a")[theme].click();
             }
         }
-        cEffect();
     }
     // 点击特效
     function cEffect (){
