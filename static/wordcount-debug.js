@@ -58,7 +58,7 @@ setTimeout(function (){
         // 估算阅读时间，范围：全文
         // 设每分钟阅读文字600字 / 代码800字符 / 图片10张
         // 结果保留一位小数
-        var readtime = (Math.round((words + copyright + reward) / 60 + code / 80) + imgs) / 10;
+        var readtime = (Math.round(words / 60 + code / 80) + imgs) / 10;
         // 如果字数不到1000，显示原字数
         if (words < 1000) {
             words = '= ' + words + ' words';
