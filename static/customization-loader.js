@@ -11,11 +11,10 @@ setTimeout(function (){
     var palette = document.querySelector("is-palette2");
     // 静态资源版本
     var ver = "1.3.12";
-    // 读取侧边栏配置
-    var sidebar;
-    // 一些需要全局使用的变量，先声明
-    var theme;
-    var autoNight;
+    // 默认设置
+    var sidebar = "0";
+    var theme = 0;
+    var autoNight = "0";
     var time;
     // 检测UA
     function checkUA (){
@@ -37,15 +36,11 @@ setTimeout(function (){
         if (customStat == true && newviewer == true) {
             // 是，调用函数
             nightAtheme();
-            // 读取cookie
-            sidebar = docCookies.getItem("sidebar_widget_background");
         }
         // 不是，插入默认的内容
         else {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
-            // 侧边栏默认设置
-            sidebar = "0";
         }
     }
     loadconfig();
@@ -55,12 +50,14 @@ setTimeout(function (){
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
+                theme = eq;
             });
         }
         else if (mode == "night") {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
+                theme = eq;
             });
         }
         else if (mode == "accent") {
@@ -115,6 +112,8 @@ setTimeout(function (){
             widget = widget + 4;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
+        // 读取cookie
+        sidebar = docCookies.getItem("sidebar_widget_background");
         sidebarB();
         cEffect();
     }
