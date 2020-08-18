@@ -69,7 +69,7 @@ setTimeout(function (){
             });
             announcement.show();
             confirmAnnounce();
-        },2000);
+        },1000);
     }
     // 确认公告按钮
     function confirmAnnounce (){
