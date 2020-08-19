@@ -37,7 +37,7 @@ setTimeout(function (){
                 setTimeout(function (){
                     $(thumbslider).remove();
                     $("link#thumbslider").remove();
-                    announce(cssPlace,ver,ld);
+                    announce(cssPlace,ver,locate,ld);
                 },500);
             }
             // 如果新人通知已经隐藏
@@ -45,11 +45,11 @@ setTimeout(function (){
                 // 删掉元素和css
                 $(thumbslider).remove();
                 $("link#thumbslider").remove();
-                announce(cssPlace,ver,ld);
+                announce(cssPlace,ver,locate,ld);
             }
             // 如果新人通知不存在
             else if (document.querySelector(thumbslider) == null) {
-                announce(cssPlace,ver,ld);
+                announce(cssPlace,ver,locate,ld);
             }
         }
     }

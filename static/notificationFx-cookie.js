@@ -44,13 +44,13 @@ setTimeout(function (){
     function checkAnnounce (){
         // 无已读公告日期或与最新公告日期不符，且不是新人，显示公告
         if ((ad == null || ad != ld) && newv == true) {
-            announce(cssPlace,ver,ld);
+            announce(cssPlace,ver,lc,ld);
         }
     }
 },1000);
 // 全局函数，简化代码
 // 公告通知
-function announce (css,ver,ld){
+function announce (css,ver,lc,ld){
     css.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
     setTimeout(function (){
         var announcement = new NotificationFx({
