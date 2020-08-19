@@ -15,54 +15,30 @@ setTimeout(function (){
     var sidebar = "0";
     var theme = 0;
     var autoNight = "0";
+    var rtheme;
     var time;
-    // 检测UA
-    function checkUA (){
-        // 移动端，加载移动端专用css
-        if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
-            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
-            headInsert.append('<link href="//zorin.beaa.cn/test/radio-mobile.css" rel="stylesheet" />');
-        }
-        // PC端，加载普通css
-        else {
-            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio.css" rel="stylesheet" />');
-            headInsert.append('<link href="//zorin.beaa.cn/test/radio.css" rel="stylesheet" />');
-        }
-    }
-    checkUA();
-    // 根据配置文件加载内容
-    function loadconfig (){
-        // 判断是否有配置文件且不是新人
-        if (customStat == true && newviewer == true) {
-            // 是，调用函数
-            nightAtheme();
-        }
-        // 不是，插入默认的内容
-        else {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
-        }
-    }
-    loadconfig();
+    var ua;
     // 监听主题点击事件函数，代码简化效率中等
     function paletteListener (eq,mode){
         if (mode == "day") {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
-                theme = eq;
+                // 回调主题
+                rtheme = eq;
             });
         }
         else if (mode == "night") {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
-                theme = eq;
+                // 回调主题
+                rtheme = eq;
             });
         }
         else if (mode == "accent") {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
-                sidebarB();
+                sideBar();
             });
         }
     }
@@ -84,6 +60,38 @@ setTimeout(function (){
     paletteListener(14,"accent");
     paletteListener(15,"accent");
     paletteListener(16,"accent");
+    paletteListener(17,"accent");
+    // 检测UA
+    function checkUA (){
+        // 移动端，加载移动端专用css
+        if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
+            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
+            headInsert.append('<link href="//zorin.beaa.cn/test/radio-mobile.css" rel="stylesheet" />');
+            ua = "nonpc";
+        }
+        // PC端，加载普通css
+        else {
+            // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio.css" rel="stylesheet" />');
+            headInsert.append('<link href="//zorin.beaa.cn/test/radio.css" rel="stylesheet" />');
+            ua = "pc";
+        }
+    }
+    checkUA();
+    // 根据配置文件加载内容
+    function loadconfig (){
+        // 判断是否有配置文件且不是新人
+        if (customStat == true && newviewer == true) {
+            // 是，调用函数
+            nightAtheme();
+            sidebar = docCookies.getItem("sidebar_widget_background");
+        }
+        // 不是，插入默认的内容
+        else {
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
+        }
+    }
+    setTimeout(loadconfig,500);
     // 黑暗模式 & 默认主题
     function nightAtheme () {
         // 读取配置
@@ -107,29 +115,27 @@ setTimeout(function (){
         // 读取配置
         var widget = parseInt(docCookies.getItem("default_theme_widget"));
         // 判断是否设置了强调色
-        if (widget > 0) {
+        if (widget == 0) {
+            palette.shadowRoot.querySelectorAll("a")[10].click();
+        }
+        else if (widget > 0 && widget < 6) {
             // 是，切换强调色
             widget = widget + 4;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
-        // 读取cookie
-        sidebar = docCookies.getItem("sidebar_widget_background");
-        sidebarB();
+        else if (widget >= 6) {
+            widget = widget + 5;
+            palette.shadowRoot.querySelectorAll("a")[widget].click();
+        }
         cEffect();
     }
     // 侧边栏背景
-    function sidebarB (){
-        if (sidebar == "0") {
-            // 是，进一步判断是否启用黑暗模式且处于工作时间
-            if (autoNight == "1" && (time >= 19 || time <= 5)) {
-                // 是，切换黑暗主题
-                palette.shadowRoot.querySelectorAll("a")[1].click();
+    function sideBar (){
+        setTimeout(function (){
+            if (sidebar == "0" && ua != "pc") {
+                palette.shadowRoot.querySelectorAll("a")[rtheme].click();
             }
-            // 否，再切换至默认主题，覆盖强调色背景
-            else {
-                palette.shadowRoot.querySelectorAll("a")[theme].click();
-            }
-        }
+        },50);
     }
     // 点击特效
     function cEffect (){
@@ -157,4 +163,4 @@ setTimeout(function (){
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-},800);
+},500);
