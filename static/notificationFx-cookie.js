@@ -1,16 +1,16 @@
 setTimeout(function (){
     // 新人标识
-    var newv = docCookies.hasItem("newbie");
+    const newv = docCookies.hasItem("newbie");
     // 页面路径
-    var lc = window.location.pathname;
+    const lc = window.location.pathname;
     // 已读公告日期
-    var ad = docCookies.getItem("announcement_date");
+    const ad = docCookies.getItem("announcement_date");
     // 最新公告日期
-    var ld = "2020.8.3";
+    const ld = "2020.8.3";
     // 静态资源版本
-    var ver = "1.3.12";
+    const ver = "1.3.12";
     // 插入css的地方
-    var cssPlace = $("head");
+    const cssPlace = $("head");
     // 非help页面，如果是新人，显示新人通知
     if (lc != "/help" && newv == false) {
         newbientf();

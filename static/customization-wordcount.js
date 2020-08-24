@@ -1,14 +1,14 @@
 setTimeout(function (){
     // 新人标识
-    var mengxin = docCookies.hasItem("newbie");
+    const mengxin = docCookies.hasItem("newbie");
     // 自定义配置文件标识
-    var custom = docCookies.hasItem("custom");
+    const custom = docCookies.hasItem("custom");
     // 静态资源版本
-    var ver = "1.3.17";
+    const ver = "1.3.17";
     // 插入js的地方
-    var bodyPlace = $("body");
+    const bodyPlace = $("body");
     // 读取配置
-    var wordcount = docCookies.getItem("wordcount_mode");
+    const wordcount = docCookies.getItem("wordcount_mode");
     // 判断是否有配置文件以及不是新人，且选项为“1"
     if ((custom == true && mengxin == true) && wordcount == "1") {
         // 是，加载js

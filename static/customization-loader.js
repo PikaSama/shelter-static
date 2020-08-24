@@ -1,23 +1,23 @@
 setTimeout(function (){
     // 新人标识
-    var newviewer = docCookies.hasItem("newbie");
+    const newviewer = docCookies.hasItem("newbie");
     // 自定义配置文件标识
-    var customStat = docCookies.hasItem("custom");
+    const customStat = docCookies.hasItem("custom");
     // 插入css的地方
-    var headInsert = $("head");
+    const headInsert = $("head");
     // 插入js的地方
-    var bodyInsert = $("body");
+    const bodyInsert = $("body");
     // 调色盘位置
-    var palette = document.querySelector("is-palette2");
+    const palette = document.querySelector("is-palette2");
     // 静态资源版本
-    var ver = "1.3.12";
+    const ver = "1.3.12";
     // 默认设置
-    var sidebar = "0";
-    var theme = 0;
-    var autoNight = "0";
-    var rtheme;
-    var time;
-    var ua;
+    let sidebar = "0";
+    let theme = 0;
+    let autoNight = "0";
+    // 声明变量
+    let rtheme;
+    let ua;
     // 监听主题点击事件函数，代码简化效率中等
     function paletteListener (eq,mode){
         if (mode == "day") {
@@ -98,7 +98,7 @@ setTimeout(function (){
         autoNight = docCookies.getItem("auto_night");
         theme = parseInt(docCookies.getItem("default_theme"));
         // 获取当前时间
-        time = new Date().getHours();
+        let time = new Date().getHours();
         // 如果启用黑暗模式且处于工作时间
         if (autoNight == "1" && (time >= 19 || time <= 5)) {
             // 是，切换黑暗主题
@@ -113,7 +113,7 @@ setTimeout(function (){
     // 默认强调色
     function widget (){
         // 读取配置
-        var widget = parseInt(docCookies.getItem("default_theme_widget"));
+        let widget = parseInt(docCookies.getItem("default_theme_widget"));
         // 判断是否设置了强调色
         if (widget == 0) {
             palette.shadowRoot.querySelectorAll("a")[10].click();
@@ -140,7 +140,7 @@ setTimeout(function (){
     // 点击特效
     function cEffect (){
         // 读取配置
-        var clickeffect = docCookies.getItem("click_effect");
+        let clickeffect = docCookies.getItem("click_effect");
         // 判断选项，加载指定文件
         if (clickeffect == "0") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
@@ -149,7 +149,8 @@ setTimeout(function (){
             bodyInsert.append('<script src="//cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>');
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb1.js"></script>');
         }
-        else if (clickeffect == "2") {
+        // clickeffect == "2"
+        else {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
         }
         l2d();
@@ -157,7 +158,7 @@ setTimeout(function (){
     // live2d看板娘
     function l2d (){
         // 读取配置
-        var live2d = docCookies.getItem("live2d");
+        let live2d = docCookies.getItem("live2d");
         // 如果启用，加载文件
         if (live2d == "1") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');

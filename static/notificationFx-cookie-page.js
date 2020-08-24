@@ -1,14 +1,14 @@
 setTimeout(function (){
     // 新人标识
-    var neo = docCookies.hasItem("newbie");
+    let neo = docCookies.hasItem("newbie");
     // 页面路径
-    var locate = window.location.pathname;
+    const locate = window.location.pathname;
     // 最新公告日期
-    var ld = "2020.8.3";
+    const ld = "2020.8.3";
     // 插入css的地方
-    var cssPlace = $("head");
+    const cssPlace = $("head");
     // 静态资源文件版本
-    var ver = "1.3.12";
+    const ver = "1.3.12";
     // 在help页面，是新人
     if (neo == false && locate == "/help") {
         // 写入新人标识
@@ -24,13 +24,18 @@ setTimeout(function (){
     // 检查是否满足显示公告的条件
     function checkAnnounce (){
         // 已读公告日期
-        var ad = docCookies.getItem("announcement_date");
+        const ad = docCookies.getItem("announcement_date");
         // 新人通知
-        var thumbslider = ".ns-box.ns-other.ns-effect-thumbslider.ns-type-error";
+        const thumbslider = ".ns-box.ns-other.ns-effect-thumbslider.ns-type-error";
         // 无已读公告或已读公告日期与最新公告日期不符，且不是新人
         if ((ad == null || ad != ld) && neo == true) {
+            // 判断新人通知是否显示过
+            if (document.querySelector(thumbslider) == null) {
+                // 没有，直接显示公告
+                announce(cssPlace,ver,locate,ld);
+            }
             // 如果新人通知还在显示
-            if (document.querySelector(thumbslider + ".ns-show") != null) {
+            else if (document.querySelector(thumbslider + ".ns-show") != null) {
                 // 加上打断属性，使其淡出
                 $(thumbslider).attr("id","canceled");
                 // 一段时间后删除元素和css
@@ -40,15 +45,11 @@ setTimeout(function (){
                     announce(cssPlace,ver,locate,ld);
                 },500);
             }
-            // 如果新人通知已经隐藏
-            else if (document.querySelector(thumbslider + ".ns-hide") != null) {
+            // 认定新人通知已隐藏
+            else {
                 // 删掉元素和css
                 $(thumbslider).remove();
                 $("link#thumbslider").remove();
-                announce(cssPlace,ver,locate,ld);
-            }
-            // 如果新人通知不存在
-            else if (document.querySelector(thumbslider) == null) {
                 announce(cssPlace,ver,locate,ld);
             }
         }

@@ -1,6 +1,6 @@
 setTimeout(function (){
     // 静态资源版本
-    var ver = "1.3.12";
+    const ver = "1.3.12";
     // 插入css
     $("head").append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
     var notification = new NotificationFx({

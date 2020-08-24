@@ -202,3 +202,55 @@
     transform: scale(0);
     transition: all 0.3s;
 }
+
+div.veditor-area i.ri-restart-line {
+    position:absolute;
+    right:4px;
+    font-size:130%;
+    color:silver;
+    transition: all 0.5s;
+}
+
+div.veditor-area i.ri-restart-line:hover {
+    color: grey;
+}
+
+div.veditor-area i.ri-restart-line:focus {
+    color: grey;
+}
+
+textarea#mvsys {
+    border: 2px solid grey;
+    padding-top: 8px;
+    padding-left: 12px;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+textarea#mvsys:hover {
+    border-color: black;
+}
+
+textarea#mvsys:focus {
+    border-color: black;
+    outline: 0;
+    box-shadow: 0 0 4px black;
+}
+
+textarea#mvsys-night {
+    border: 2px solid grey;
+    padding-top: 8px;
+    padding-left: 12px;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+textarea#mvsys-night:hover {
+    border-color: white;
+}
+
+textarea#mvsys-night:focus {
+    border-color: white;
+    outline: 0;
+    box-shadow: 0 0 4px white;
+}

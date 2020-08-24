@@ -1,9 +1,9 @@
 // 根据主题Ayer修改
 setTimeout(function (){
     // 静态资源版本
-    var ver = "1.3.12";
+    const ver = "1.3.12";
     // is-a元素位置，整个页面
-    var canvasplace = $("[class='φbm φv']");
+    const canvasplace = $("[class='φbm φv']");
     // 插入canvas
     canvasplace.prepend('<canvas width="1777"height="841"style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>');
     // 引入js

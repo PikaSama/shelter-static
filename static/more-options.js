@@ -1,6 +1,6 @@
 setTimeout(function (){
-    var more = ".φeo.φc.φw.φbd.φl.φr";
-    var mode = 0;
+    const more = ".φeo.φc.φw.φbd.φl.φr";
+    let mode = 0;
     $('<a class="φeo φc φw φbd φl φr">📥 More</a>').insertAfter(more + ":eq(3)");
     $('<a class="φeo φc φw φbd φl φr" style="display:none;" href="/abyss">🖤 Abyss</a>').insertAfter(more + ":eq(4)");
     $('<a class="φeo φc φw φbd φl φr" style="display:none;" href="/todo">📃 Todo</a>').insertAfter(more + ":eq(5)");
