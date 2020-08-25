@@ -161,6 +161,7 @@ setTimeout(function (){
         // 如果页面主题是黑暗则更改选项样式
         if (night == "1") {
             $(".input-radio").attr("class","input-radio-night");
+            $("textarea#mvsys").attr("id","mvsys-night");
         }
         save();
     }

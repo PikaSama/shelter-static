@@ -24,6 +24,7 @@ setTimeout(function (){
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
+                $("textarea#mvsys-night").attr("id","mvsys");
                 // 回调主题
                 rtheme = eq;
             });
@@ -32,6 +33,7 @@ setTimeout(function (){
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
+                $("textarea#mvsys").attr("id","mvsys-night");
                 // 回调主题
                 rtheme = eq;
             });
