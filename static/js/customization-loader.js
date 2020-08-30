@@ -1,4 +1,9 @@
-setTimeout(function (){
+/*
+Author: Zorin
+Github: https://github.com/PikaSama
+License: GPL-3.0 License
+ */
+(async () => {
     // 新人标识
     const newviewer = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -18,10 +23,18 @@ setTimeout(function (){
     // 声明变量
     let rtheme;
     let ua;
+    await sleep(500);
+    // 侧边栏背景
+    const sideBar = async () => {
+        await sleep(50);
+        if (sidebar == "0" && ua != "pc") {
+            palette.shadowRoot.querySelectorAll("a")[rtheme].click();
+        }
+    }
     // 监听主题点击事件函数，代码简化效率中等
-    function paletteListener (eq,mode){
+    const paletteListener = (eq,mode) => {
         if (mode == "day") {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
                 $("textarea#mvsys-night").attr("id","mvsys");
@@ -30,7 +43,7 @@ setTimeout(function (){
             });
         }
         else if (mode == "night") {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
                 $("textarea#mvsys").attr("id","mvsys-night");
@@ -39,12 +52,12 @@ setTimeout(function (){
             });
         }
         else if (mode == "accent") {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", function (){
+            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 sideBar();
             });
         }
     }
-    // 监听调色盘五个主题的点击事件
+    // 监听调色盘主题和强调色的点击事件
     paletteListener(0,"day");
     paletteListener(2,"day");
     paletteListener(3,"day");
@@ -64,7 +77,7 @@ setTimeout(function (){
     paletteListener(16,"accent");
     paletteListener(17,"accent");
     // 检测UA
-    function checkUA (){
+    const checkUA = () => {
         // 移动端，加载移动端专用css
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
             // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
@@ -80,11 +93,11 @@ setTimeout(function (){
     }
     checkUA();
     // 根据配置文件加载内容
-    function loadconfig (){
+    const loadconfig = () => {
         // 判断是否有配置文件且不是新人
         if (customStat == true && newviewer == true) {
             // 是，调用函数
-            nightAtheme();
+            loadRes();
             sidebar = docCookies.getItem("sidebar_widget_background");
         }
         // 不是，插入默认的内容
@@ -93,9 +106,16 @@ setTimeout(function (){
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-    setTimeout(loadconfig,500);
+    await sleep(500,loadconfig);
+    // 加载资源函数
+    const loadRes = () => {
+        nightMode_And_Theme();
+        widget();
+        cEffect();
+        l2d();
+    }
     // 黑暗模式 & 默认主题
-    function nightAtheme () {
+    const nightMode_And_Theme = () => {
         // 读取配置
         autoNight = docCookies.getItem("auto_night");
         theme = parseInt(docCookies.getItem("default_theme"));
@@ -110,10 +130,9 @@ setTimeout(function (){
         else {
             palette.shadowRoot.querySelectorAll("a")[theme].click();
         }
-        widget();
     }
     // 默认强调色
-    function widget (){
+    const widget = () => {
         // 读取配置
         let widget = parseInt(docCookies.getItem("default_theme_widget"));
         // 判断是否设置了强调色
@@ -129,18 +148,9 @@ setTimeout(function (){
             widget = widget + 5;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
-        cEffect();
-    }
-    // 侧边栏背景
-    function sideBar (){
-        setTimeout(function (){
-            if (sidebar == "0" && ua != "pc") {
-                palette.shadowRoot.querySelectorAll("a")[rtheme].click();
-            }
-        },50);
     }
     // 点击特效
-    function cEffect (){
+    const cEffect = () => {
         // 读取配置
         let clickeffect = docCookies.getItem("click_effect");
         // 判断选项，加载指定文件
@@ -155,10 +165,9 @@ setTimeout(function (){
         else {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
         }
-        l2d();
     }
     // live2d看板娘
-    function l2d (){
+    const l2d = () => {
         // 读取配置
         let live2d = docCookies.getItem("live2d");
         // 如果启用，加载文件
@@ -166,4 +175,4 @@ setTimeout(function (){
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-},500);
+})();

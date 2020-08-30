@@ -1,5 +1,10 @@
-// 脚本来源: https://wardzhou.art
-setTimeout(function (){
+/*
+Author: Zorin
+Github: https://github.com/PikaSama
+License: GPL-3.0 License
+Description: 代码参考于：https://wardzhou.art
+ */
+setTimeout(() =>{
     // bio位置
     const typeplace = $("[class='φee']");
     // 插入span
