@@ -19,6 +19,12 @@ License: GPL-3.0 License
   jsPlace.append('<div id="mvcomments"></div>');
   // 重载按钮函数
   const reloadBtn = async () => {
+    if (lct == "/settings") {
+        await sleep(1200);
+    }
+    else {
+        await sleep(500);
+    }
     // 添加重载按钮
     $("div.veditor-area").append('<i class="ri-restart-line"></i>');
     // 添加按钮监听事件
@@ -49,13 +55,7 @@ License: GPL-3.0 License
       enableQQ: true,
       emoticonUrl: bqburl
     });
-    // 如果是设置页面，延长加载时间
-    if (lct == "/settings") {
-      await sleep(1200,reloadBtn);
-    }
-    else {
-      await sleep(500,reloadBtn);
-    }
+    reloadBtn();
   }
   else {
     new MiniValine({
@@ -76,11 +76,6 @@ License: GPL-3.0 License
         'https://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/Coolapk'
       ]
     });
-    if (lct == "/settings") {
-      await sleep(1200,reloadBtn);
-    }
-    else {
-      await sleep(500,reloadBtn);
-    }
+    reloadBtn();
   }
 })();

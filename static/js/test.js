@@ -8,11 +8,15 @@ const sleep = (ms,func) => {
         },ms);
     });
 }
+async function a(){
+	await sleep(5000);
+	console.log(3);
+}
 (async () => {
-    if (true){
-        await sleep(5000,() => {
-            console.log(1);
-        })
-    }
-    console.log(2);
+	console.log(2);
+	console.log(2);
+	console.log(2);
+	console.log(2);
+	console.log(2);
+	a();
 })();
