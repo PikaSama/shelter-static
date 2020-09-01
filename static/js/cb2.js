@@ -1,8 +1,8 @@
 /*
-Author: Zorin
-Github: https://github.com/PikaSama
-License: GPL-3.0 License
-Description: 移植于主题Ayer
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: 移植于主题Ayer
  */
 (async () => {
     await sleep(500);

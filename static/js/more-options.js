@@ -1,3 +1,9 @@
+/*
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: A lightweight more-options button.
+ */
 setTimeout(function (){
     const more = ".φeo.φc.φw.φbd.φl.φr";
     let mode = 0;

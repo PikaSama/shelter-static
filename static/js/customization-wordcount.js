@@ -1,3 +1,9 @@
+/*
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: Custom settings of wordcount.
+ */
 setTimeout(function (){
     // 新人标识
     const mengxin = docCookies.hasItem("newbie");

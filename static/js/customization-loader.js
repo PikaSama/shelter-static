@@ -1,7 +1,8 @@
 /*
-Author: Zorin
-Github: https://github.com/PikaSama
-License: GPL-3.0 License
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: Loader of custom config.
  */
 (async () => {
     // 新人标识
@@ -82,7 +83,7 @@ License: GPL-3.0 License
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
             // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
             headInsert.append('<link href="//zorin.beaa.cn/test/radio-mobile.css" rel="stylesheet" />');
-            ua = "nonpc";
+            ua = "non-pc";
         }
         // PC端，加载普通css
         else {
@@ -97,7 +98,7 @@ License: GPL-3.0 License
         // 判断是否有配置文件且不是新人
         if (customStat == true && newviewer == true) {
             // 是，调用函数
-            loadRes();
+            nightMode_And_Theme();
             sidebar = docCookies.getItem("sidebar_widget_background");
         }
         // 不是，插入默认的内容
@@ -107,13 +108,12 @@ License: GPL-3.0 License
         }
     }
     await sleep(500,loadconfig);
-    // 加载资源函数
-    const loadRes = () => {
+    /* 加载资源顺序
         nightMode_And_Theme();
         widget();
         cEffect();
         l2d();
-    }
+     */
     // 黑暗模式 & 默认主题
     const nightMode_And_Theme = () => {
         // 读取配置
@@ -130,6 +130,7 @@ License: GPL-3.0 License
         else {
             palette.shadowRoot.querySelectorAll("a")[theme].click();
         }
+        widget();
     }
     // 默认强调色
     const widget = () => {
@@ -148,6 +149,7 @@ License: GPL-3.0 License
             widget = widget + 5;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
+        cEffect();
     }
     // 点击特效
     const cEffect = () => {
@@ -165,6 +167,7 @@ License: GPL-3.0 License
         else {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
         }
+        l2d();
     }
     // live2d看板娘
     const l2d = () => {

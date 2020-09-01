@@ -1,14 +1,15 @@
 /*
-Author: Zorin
-Github: https://github.com/PikaSama
-License: GPL-3.0 License
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: Custom settings for MiniValine.
  */
 (async () => {
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");
   // 自定义配置标识
   const custom = docCookies.hasItem("custom");
-  // js插入处
+  // 插入js的位置
   const jsPlace = $(".φbz.φy .φbl");
   // 评论重载状态
   const isreload = docCookies.getItem("mvreload");
@@ -19,6 +20,7 @@ License: GPL-3.0 License
   jsPlace.append('<div id="mvcomments"></div>');
   // 重载按钮函数
   const reloadBtn = async () => {
+    // 延长加载时间
     if (lct == "/settings") {
         await sleep(1200);
     }
@@ -55,7 +57,7 @@ License: GPL-3.0 License
       enableQQ: true,
       emoticonUrl: bqburl
     });
-    reloadBtn();
+    await reloadBtn();
   }
   else {
     new MiniValine({
@@ -76,6 +78,6 @@ License: GPL-3.0 License
         'https://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/Coolapk'
       ]
     });
-    reloadBtn();
+    await reloadBtn();
   }
 })();
