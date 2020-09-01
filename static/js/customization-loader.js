@@ -93,27 +93,6 @@
         }
     }
     checkUA();
-    // 根据配置文件加载内容
-    const loadconfig = () => {
-        // 判断是否有配置文件且不是新人
-        if (customStat == true && newviewer == true) {
-            // 是，调用函数
-            nightMode_And_Theme();
-            sidebar = docCookies.getItem("sidebar_widget_background");
-        }
-        // 不是，插入默认的内容
-        else {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
-        }
-    }
-    await sleep(500,loadconfig);
-    /* 加载资源顺序
-        nightMode_And_Theme();
-        widget();
-        cEffect();
-        l2d();
-     */
     // 黑暗模式 & 默认主题
     const nightMode_And_Theme = () => {
         // 读取配置
@@ -130,7 +109,6 @@
         else {
             palette.shadowRoot.querySelectorAll("a")[theme].click();
         }
-        widget();
     }
     // 默认强调色
     const widget = () => {
@@ -149,7 +127,6 @@
             widget = widget + 5;
             palette.shadowRoot.querySelectorAll("a")[widget].click();
         }
-        cEffect();
     }
     // 点击特效
     const cEffect = () => {
@@ -167,7 +144,6 @@
         else {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
         }
-        l2d();
     }
     // live2d看板娘
     const l2d = () => {
@@ -178,4 +154,25 @@
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
+    const loadRes = async () => {
+        nightMode_And_Theme();
+        widget();
+        cEffect();
+        l2d();
+    }
+    // 根据配置文件加载内容
+    const loadconfig = () => {
+        // 判断是否有配置文件且不是新人
+        if (customStat == true && newviewer == true) {
+            // 是，调用函数
+            sidebar = docCookies.getItem("sidebar_widget_background");
+            loadRes();
+        }
+        // 不是，插入默认的内容
+        else {
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
+        }
+    }
+    await sleep(500,loadconfig);
 })();
