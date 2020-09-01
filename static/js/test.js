@@ -15,11 +15,10 @@ const sleep = (ms,func) => {
         },ms);
     });
 }
-async function a(){
-	await sleep(5000);
-	console.log(3);
+const b = () => {
+    a();
 }
-(async () => {
-	await a();
-	console.log(2);
-})();
+const a = () => {
+    console.log(1);
+}
+b();
