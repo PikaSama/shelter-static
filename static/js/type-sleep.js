@@ -4,6 +4,17 @@ Github: https://github.com/PikaSama
 License: GPL-3.0 License
 Description: 代码参考于：https://wardzhou.art
  */
+// 延迟执行全局函数（异步）
+const sleep = (ms,func) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            if (func != undefined){
+                func();
+            }
+            resolve();
+        },ms);
+    });
+}
 setTimeout(() =>{
     // bio位置
     const typeplace = $("[class='φee']");
@@ -25,14 +36,3 @@ setTimeout(() =>{
     };
     const typed = new Typed("#typedtext", options);
 },1000);
-// 延迟执行全局函数（异步）
-const sleep = (ms,func) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            if (func != undefined){
-                func();
-            }
-            resolve();
-        },ms);
-    });
-}

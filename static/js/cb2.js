@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: 移植于主题Ayer
  */
-(async () => {
+window.onload = async () => {
     await sleep(500);
     // 静态资源版本
     const ver = "1.3.12";
@@ -15,4 +15,4 @@
     await sleep(500);
     // 引入js
     canvasplace.append('<script src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/clickBoom2.js"></script>');
-})();
+}

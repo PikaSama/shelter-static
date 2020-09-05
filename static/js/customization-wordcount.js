@@ -2,9 +2,9 @@
  Author: Zorin
  Github: https://github.com/PikaSama
  License: GPL-3.0 License
- Description: Custom settings of wordcount.
+ Description: Custom settings for wordcount.
  */
-setTimeout(function (){
+window.onload = async () => {
     // 新人标识
     const mengxin = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -15,6 +15,7 @@ setTimeout(function (){
     const bodyPlace = $("body");
     // 读取配置
     const wordcount = docCookies.getItem("wordcount_mode");
+    await sleep(1000);
     // 判断是否有配置文件以及不是新人，且选项为“1"
     if ((custom == true && mengxin == true) && wordcount == "1") {
         // 是，加载js
@@ -26,4 +27,4 @@ setTimeout(function (){
     else {
         bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-debug.js"></script>');
     }
-},500);
+}

@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Custom settings for MiniValine.
  */
-(async () => {
+window.onload = async () => {
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");
   // 自定义配置标识
@@ -18,6 +18,7 @@
   await sleep(500);
   // 插入元素
   jsPlace.append('<div id="mvcomments"></div>');
+  // --- 函数区 ---
   // 重载按钮函数
   const reloadBtn = async () => {
     // 延长加载时间
@@ -44,6 +45,8 @@
       docCookies.setItem("mvreload", "0" , Infinity, "/", "shelter.beaa.cn", true);
     }
   }
+  // ------------
+  // --- 代码区 ---
   // 是否有配置文件，且不是新人
   if (custom == true && iscommon == true) {
     // 表情包列表
@@ -80,4 +83,5 @@
     });
     await reloadBtn();
   }
-})();
+  // ----------
+}

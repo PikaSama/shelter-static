@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Loader of custom config.
  */
-(async () => {
+window.onload = async () => {
     // 新人标识
     const newviewer = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -25,6 +25,7 @@
     let rtheme;
     let ua;
     await sleep(500);
+    // --- 函数区 ---
     // 侧边栏背景
     const sideBar = async () => {
         await sleep(50);
@@ -58,26 +59,6 @@
             });
         }
     }
-    // 监听调色盘主题和强调色的点击事件
-    paletteListener(0,"day");
-    paletteListener(2,"day");
-    paletteListener(3,"day");
-    paletteListener(4,"day");
-    paletteListener(1,"night");
-    paletteListener(5,"accent");
-    paletteListener(6,"accent");
-    paletteListener(7,"accent");
-    paletteListener(8,"accent");
-    paletteListener(9,"accent");
-    paletteListener(10,"accent");
-    paletteListener(11,"accent");
-    paletteListener(12,"accent");
-    paletteListener(13,"accent");
-    paletteListener(14,"accent");
-    paletteListener(15,"accent");
-    paletteListener(16,"accent");
-    paletteListener(17,"accent");
-    // 检测UA
     const checkUA = () => {
         // 移动端，加载移动端专用css
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
@@ -92,7 +73,6 @@
             ua = "pc";
         }
     }
-    checkUA();
     // 黑暗模式 & 默认主题
     const nightMode_And_Theme = () => {
         // 读取配置
@@ -174,5 +154,29 @@
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
+    // ----------
+    // --- 代码区 ---
     await sleep(500,loadconfig);
-})();
+    // 监听调色盘主题和强调色的点击事件
+    paletteListener(0,"day");
+    paletteListener(2,"day");
+    paletteListener(3,"day");
+    paletteListener(4,"day");
+    paletteListener(1,"night");
+    paletteListener(5,"accent");
+    paletteListener(6,"accent");
+    paletteListener(7,"accent");
+    paletteListener(8,"accent");
+    paletteListener(9,"accent");
+    paletteListener(10,"accent");
+    paletteListener(11,"accent");
+    paletteListener(12,"accent");
+    paletteListener(13,"accent");
+    paletteListener(14,"accent");
+    paletteListener(15,"accent");
+    paletteListener(16,"accent");
+    paletteListener(17,"accent");
+    // 检测ua
+    checkUA();
+    // --------------
+}

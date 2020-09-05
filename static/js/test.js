@@ -15,10 +15,45 @@ const sleep = (ms,func) => {
         },ms);
     });
 }
-const b = () => {
-    a();
-}
+let b = 0;
 const a = () => {
-    console.log(1);
+    return new Promise((resolve,reject) => {
+        if (b == 1){
+            resolve("success");
+        }
+        else {
+            reject("failure");
+        }
+    })
 }
-b();
+
+/* Same
+    a().then(console.log,console.error);
+ */
+//a().then(console.log).catch(console.error);
+
+/*
+let texts = "";
+const yiyan = () => {
+    fetch('https://v1.hitokoto.cn?c=i')
+        .then(response => response.json())
+        .then(data => {
+            texts = texts + data.hitokoto.substr(0,data.hitokoto.length - 1) + "/";
+            texts = texts.replace(/，/g,"，^200");
+            texts = texts.replace(/。/g,"。^200");
+            texts = texts.replace(/？/g,"？^200");
+            console.log(texts);
+        })
+        .catch(console.error);
+}
+yiyan();
+let f = async () => {
+    for (let i = 0;i < 5;i++){
+        yiyan();
+    }
+    await sleep(500);
+    texts = texts.split("/");
+    texts.length = 5;
+    console.log(texts);
+}
+ */

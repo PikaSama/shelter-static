@@ -1,4 +1,4 @@
-(async () => {
+window.onload = async () => {
     // 新人标识
     const newv = docCookies.hasItem("newbie");
     // 页面路径
@@ -12,6 +12,7 @@
     // 插入css的地方
     const cssPlace = $("head");
     await sleep(1000);
+    // --- 函数区 ---
     // 新人通知
     const newbientf = async () => {
         cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
@@ -38,6 +39,8 @@
             announce(cssPlace,ver,lc,ld);
         }
     }
+    // -----------
+    // --- 代码区 ---
     // 非help页面，如果是新人，显示新人通知
     if (lc != "/help" && newv == false) {
         await newbientf();
@@ -46,28 +49,28 @@
     else if (lc != "/help" && newv == true) {
         checkAnnounce();
     }
-})();
-// 全局函数，简化代码
+    // -------------
+}
+// --- 全局函数，简化代码 ---
 // 公告通知
-function announce (css,ver,lc,ld){
+const announce = async (css,ver,lc,ld) => {
     css.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
-    setTimeout(function (){
-        var announcement = new NotificationFx({
-            wrapper : document.body,
-            message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + lc + '#cofirmed">确认公告</a></p>',
-            layout : 'growl',
-            effect : 'jelly',
-            type : 'error',
-            ttl : 10000,
-            onClose : function() { return false; },
-            onOpen : function() { return false; }
-        });
-        announcement.show();
-        confirmAnnounce(ld);
-    },1000);
+    await sleep(1000);
+    let announcement = new NotificationFx({
+        wrapper : document.body,
+        message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + lc + '#cofirmed">确认公告</a></p>',
+        layout : 'growl',
+        effect : 'jelly',
+        type : 'error',
+        ttl : 10000,
+        onClose : function() { return false; },
+        onOpen : function() { return false; }
+    });
+    announcement.show();
+    confirmAnnounce(ld);
 }
 // 确认公告按钮
-function confirmAnnounce (ld){
+const confirmAnnounce = (ld) => {
     // 监听按钮点击事件
     $("a#confirm").click(function (){
         // 关闭公告通知
@@ -76,3 +79,4 @@ function confirmAnnounce (ld){
         docCookies.setItem("announcement_date", ld, Infinity, "/", "shelter.beaa.cn", true);
     });
 }
+// -----------
