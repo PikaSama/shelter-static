@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Custom settings for MiniValine.
  */
-window.onload = async () => {
+$().ready(async () => {
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");
   // 自定义配置标识
@@ -84,4 +84,4 @@ window.onload = async () => {
     await reloadBtn();
   }
   // ----------
-}
+});

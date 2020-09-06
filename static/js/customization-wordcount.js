@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Custom settings for wordcount.
  */
-window.onload = async () => {
+$().ready(async () => {
     // 新人标识
     const mengxin = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -27,4 +27,4 @@ window.onload = async () => {
     else {
         bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-debug.js"></script>');
     }
-}
+});

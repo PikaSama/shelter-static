@@ -1,4 +1,4 @@
-window.onload = async () => {
+$().ready(async () => {
     // 新人标识
     const newv = docCookies.hasItem("newbie");
     // 页面路径
@@ -50,7 +50,7 @@ window.onload = async () => {
         checkAnnounce();
     }
     // -------------
-}
+});
 // --- 全局函数，简化代码 ---
 // 公告通知
 const announce = async (css,ver,lc,ld) => {

@@ -1,4 +1,4 @@
-window.onload = async () => {
+$().ready(async () => {
     // 新人标识
     let neo = docCookies.hasItem("newbie");
     // 页面路径
@@ -58,4 +58,4 @@ window.onload = async () => {
         await checkAnnounce();
     }
     // ------------
-}
+});

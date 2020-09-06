@@ -1,4 +1,4 @@
-window.onload = async () => {
+$().ready(async () => {
     // 静态资源版本
     const ver = "1.3.12";
     // 插入css
@@ -16,4 +16,4 @@ window.onload = async () => {
     notification.show();
     await sleep(1000);
     $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
-}
+});

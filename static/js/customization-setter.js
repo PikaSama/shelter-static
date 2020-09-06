@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Setter of custom config page.
  */
-window.onload = async () => {
+$().ready(async () => {
     // 正文内h2,h3标题
     const h2title = ".φbi.φy.φg h2";
     const h3title = ".φbi.φy.φg h3";
@@ -271,4 +271,4 @@ window.onload = async () => {
     if (lct == "/settings") {
         await setter();
     }
-}
+});

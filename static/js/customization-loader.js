@@ -4,7 +4,7 @@
  License: GPL-3.0 License
  Description: Loader of custom config.
  */
-window.onload = async () => {
+$().ready(async () => {
     // 新人标识
     const newviewer = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -179,4 +179,4 @@ window.onload = async () => {
     // 检测ua
     checkUA();
     // --------------
-}
+});
