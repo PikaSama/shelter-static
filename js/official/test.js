@@ -8,14 +8,18 @@
 const sleep = (ms,func) => {
     return new Promise(resolve => {
         setTimeout(() => {
-            if (func != undefined){
+            if (typeof func == "function"){
+                console.log("yes");
                 func();
+            }
+            else {
+                console.log("no");
             }
             resolve();
         },ms);
     });
 }
-let b = 0;
+let b = 1;
 const a = () => {
     return new Promise((resolve,reject) => {
         if (b == 1){
@@ -27,6 +31,8 @@ const a = () => {
     })
 }
 
+async function c(){await sleep(3000,a);}
+c();
 /* Same
     a().then(console.log,console.error);
  */

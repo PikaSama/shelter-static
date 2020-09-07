@@ -4,7 +4,18 @@
  License: GPL-3.0 License
  Description: Custom settings for MiniValine.
  */
-$().ready(async () => {
+(async () => {
+  const sleep = (ms,func) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            if (typeof func == "function"){
+                func();
+            }
+            resolve();
+        },ms);
+    });
+  }
+  await sleep(500);
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");
   // 自定义配置标识
@@ -15,7 +26,6 @@ $().ready(async () => {
   const isreload = docCookies.getItem("mvreload");
   // 页面路径
   const lct = window.location.pathname;
-  await sleep(500);
   // 插入元素
   jsPlace.append('<div id="mvcomments"></div>');
   // --- 函数区 ---
@@ -84,4 +94,4 @@ $().ready(async () => {
     await reloadBtn();
   }
   // ----------
-});
+})();
