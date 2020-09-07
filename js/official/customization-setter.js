@@ -5,7 +5,8 @@
  Description: Setter of custom config page.
  */
 (async () => {
-    const sleep = (ms,func) => {
+    // 延迟执行函数
+    const delay = (ms,func) => {
         return new Promise(resolve => {
             setTimeout(() => {
                 if (typeof func == "function"){
@@ -15,7 +16,7 @@
             },ms);
         });
     }
-    await sleep(1000);
+    await delay(1000);
     // 正文内h2,h3标题
     const h2title = ".φbi.φy.φg h2";
     const h3title = ".φbi.φy.φg h3";
@@ -55,10 +56,42 @@
         $("input#" + id + "_" + vari).attr("checked","");
     }
     // 选项点击事件监听，代码简化效率高
-    const clickListener = (id,vari,eq) => {
-        $("input#" + id + "_" + eq).click(() => {
-            eval(vari + "=" + eq);
-        });
+    const clickListener = {
+        darkmode: eq => {
+            $("input#autonight_" + eq).click(() => {
+                autoNight = eq;
+            });
+        },
+        theme: eq => {
+            $("input#theme_" + eq).click(() => {
+               defaultTheme = eq;
+            });
+        },
+        widget: eq => {
+            $("input#widget_" + eq).click(() => {
+                defaultWidget = eq;
+            });
+        },
+        sidebar: eq => {
+            $("input#sidebar_" + eq).click(() => {
+                sidebarBackground = eq;
+            });
+        },
+        effect: eq => {
+            $("input#effect_" + eq).click(() => {
+                clickEffect = eq;
+            });
+        },
+        l2d: eq => {
+            $("input#live2d_" + eq).click(() => {
+                live2d = eq;
+            });
+        }
+        wordcount: eq => {
+            $("input#wordcount_" + eq).click(() => {
+                wordcountMode = eq;
+            });
+        }
     }
     // 写入配置文件函数，代码简化效率高
     const setCfg = () => {
@@ -149,7 +182,7 @@
             // 是，则添加属性，使其淡出
             $(jelly).attr("id","canceled");
             // 过段时间后删除元素
-            await sleep(500);
+            await delay(500);
             $(jelly).remove();
         }
         // 否，认定通知为隐藏状态，直接删除元素
@@ -159,7 +192,7 @@
     }
     // 保存成功的通知
     const savedntf = async () => {
-        await sleep(1000);
+        await delay(1000);
         var savednotification = new NotificationFx({
             wrapper : document.body,
             message : '<p>🔔【消息】<br />你的配置文件保存成功啦~<br />博客将会在几秒后刷新页面，请耐心等待~<br />无法刷新？试试&nbsp;&nbsp;<a href="https://shelter.beaa.cn/settings">手动刷新</a></p>',
@@ -172,46 +205,50 @@
         });
         savednotification.show();
         // 3秒后刷新页面
-        await sleep(3000);
+        await delay(3000);
         window.location.reload();
     }
     // 监听选项，保存按钮的点击事件
     const clickSet = () => {
         // 选项的监听
-        clickListener("autonight","autoNight",1);
-        clickListener("autonight","autoNight",0);
-        clickListener("theme","defaultTheme",0);
-        clickListener("theme","defaultTheme",1);
-        clickListener("theme","defaultTheme",2);
-        clickListener("theme","defaultTheme",3);
-        clickListener("theme","defaultTheme",4);
-        clickListener("widget","defaultWidget",0);
-        clickListener("widget","defaultWidget",1);
-        clickListener("widget","defaultWidget",2);
-        clickListener("widget","defaultWidget",3);
-        clickListener("widget","defaultWidget",4);
-        clickListener("widget","defaultWidget",5);
-        clickListener("widget","defaultWidget",6);
-        clickListener("widget","defaultWidget",7);
-        clickListener("widget","defaultWidget",8);
-        clickListener("widget","defaultWidget",9);
-        clickListener("widget","defaultWidget",10);
-        clickListener("widget","defaultWidget",11);
-        clickListener("widget","defaultWidget",12);
-        clickListener("sidebar","sidebarBackground",0);
-        clickListener("sidebar","sidebarBackground",1);
-        clickListener("effect","clickEffect",0);
-        clickListener("effect","clickEffect",1);
-        clickListener("effect","clickEffect",2);
-        clickListener("live2d","live2d",0);
-        clickListener("live2d","live2d",1);
-        clickListener("wordcount","wordcountMode",0);
-        clickListener("wordcount","wordcountMode",1);
+        clickListener.darkmode(0);
+        clickListener.darkmode(1);
+        clickListener.theme(0);
+        clickListener.theme(1);
+        clickListener.theme(2);
+        clickListener.theme(3);
+        clickListener.theme(4);
+        clickListener.widget(0);
+        clickListener.widget(1);
+        clickListener.widget(2);
+        clickListener.widget(3);
+        clickListener.widget(4);
+        clickListener.widget(5);
+        clickListener.widget(6);
+        clickListener.widget(7);
+        clickListener.widget(8);
+        clickListener.widget(9);
+        clickListener.widget(10);
+        clickListener.widget(11);
+        clickListener.widget(12);
+        clickListener.sidebar(0);
+        clickListener.sidebar(1);
+        clickListener.effect(0);
+        clickListener.effect(1);
+        clickListener.effect(2);
+        clickListener.l2d(0);
+        clickListener.l2d(1);
+        clickListener.wordcount(0);
+        clickListener.wordcount(1);
         // 保存按钮的监听
         $(".button-save").click(async () => {
             // 读取输入框内容
-            if (document.querySelector("textarea#mvsys") != null)
-            bqb = $("textarea#mvsys").val();
+            if (document.querySelector("textarea#mvsys") != null) {
+                bqb = $("textarea#mvsys").val();
+            }
+            else {
+                bqb = $("textarea#mvsys-night").val();
+            }
             // 写入配置文件
             setCfg();
             // 将按钮设置为关闭状态
@@ -245,13 +282,13 @@
         $('<p id="loading">读取用户配置文件中...</p>').insertAfter(h2title + ":eq(0)");
         // 如果是新人则不显示
         if(newbie == false) {
-            await sleep(1000);
+            await delay(1000);
             $("p#loading").remove();
             $('<p>读取用户配置文件失败：未满足读取条件，需查看<a href="/help">使用教程</a></p>').insertAfter(h2title + ":eq(0)");
         }
         // 如果不是新人但没有配置文件
         else if(custom == false && newbie == true) {
-            await sleep(1000);
+            await delay(1000);
             $("p#loading").remove();
             $('<p>用户配置文件为空，已自动创建新配置文件</p><p>如果要修改配置文件，点击保存按钮即可生效</p>').insertAfter(h2title + ":eq(0)");
             // 写入初始配置文件参数，自定义配置文件标识
@@ -271,7 +308,7 @@
         }
         // 如果不是新人且有配置文件
         else if(custom == true && newbie == true) {
-            await sleep(1000);
+            await delay(1000);
             $("p#loading").remove();
             $('<p>成功读取配置文件</p><p>如果要修改配置文件，点击保存按钮即可生效</p>').insertAfter(h2title + ":eq(0)");
             await setterB();

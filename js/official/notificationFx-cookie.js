@@ -1,5 +1,12 @@
+/*
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: Notification system, including notification for newbie and annoucement features.
+ */
 (async () => {
-    const sleep = (ms,func) => {
+    // 延迟执行函数
+    const delay = (ms,func) => {
         return new Promise(resolve => {
             setTimeout(() => {
                 if (typeof func == "function"){
@@ -9,7 +16,7 @@
             },ms);
         });
     }
-    await sleep(1000);
+    await delay(1000);
     // 新人标识
     const newv = docCookies.hasItem("newbie");
     // 页面路径
@@ -26,7 +33,7 @@
     // 新人通知
     const newbientf = async () => {
         cssPlace.append('<link id="thumbslider" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-other.css" rel="stylesheet">');
-        await sleep(1000);
+        await delay(1000);
         let notification = new NotificationFx({
             wrapper : document.body,
             message : '<div class="ns-thumb"><img height="72px" width="72px" src="https://cdn.jsdelivr.net/gh/PikaSama/shelter-images@1.3.4/images/icon.png"/></div><div style="width:280px;" class="ns-content"><p>第一次访问博客？来看看<a style="color:#1eb4f0;" href="https://shelter.beaa.cn/help">使用教程</a>&nbsp;叭~<br />移动端请点击右下角的圆点打开侧边栏“<span class="φbk icon-sidebar"></span>”<br />(浏览后即可永久关闭此通知)</p></div>',
@@ -39,7 +46,7 @@
         });
         notification.show();
         // 修改通知长度
-        await sleep(600);
+        await delay(600);
         $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
     }
     // 检查是否满足显示公告的条件
@@ -65,7 +72,7 @@
 // 公告通知
 async function announce(css,ver,lc,ld) {
     css.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
-    await sleep(1000);
+    await delay(1000);
     let announcement = new NotificationFx({
         wrapper : document.body,
         message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + lc + '#cofirmed">确认公告</a></p>',

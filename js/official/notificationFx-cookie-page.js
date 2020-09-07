@@ -1,5 +1,12 @@
+/*
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: An extension of notificationFx-cookie.js.
+ */
 (async () => {
-    const sleep = (ms,func) => {
+    // 延迟执行函数
+    const delay = (ms,func) => {
         return new Promise(resolve => {
             setTimeout(() => {
                 if (typeof func == "function"){
@@ -9,7 +16,7 @@
             },ms);
         });
     }
-    await sleep(1000);
+    await delay(1000);
     // 新人标识
     let neo = docCookies.hasItem("newbie");
     // 页面路径
@@ -39,7 +46,7 @@
                 // 加上打断属性，使其淡出
                 $(thumbslider).attr("id","canceled");
                 // 一段时间后删除元素和css
-                await sleep(500);
+                await delay(500);
                 $(thumbslider).remove();
                 $("link#thumbslider").remove();
                 await announce(cssPlace,ver,locate,ld);

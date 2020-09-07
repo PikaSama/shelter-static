@@ -5,7 +5,8 @@
  Description: Custom settings for MiniValine.
  */
 (async () => {
-  const sleep = (ms,func) => {
+  // 延迟执行函数
+  const delay = (ms,func) => {
     return new Promise(resolve => {
         setTimeout(() => {
             if (typeof func == "function"){
@@ -15,7 +16,7 @@
         },ms);
     });
   }
-  await sleep(500);
+  await delay(500);
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");
   // 自定义配置标识
@@ -33,15 +34,15 @@
   const reloadBtn = async () => {
     // 延长加载时间
     if (lct == "/settings") {
-        await sleep(1200);
+        await delay(1200);
     }
     else {
-        await sleep(500);
+        await delay(500);
     }
     // 添加重载按钮
     $("div.veditor-area").append('<i class="ri-restart-line"></i>');
     // 添加按钮监听事件
-    await sleep(500);
+    await delay(500);
     $("div.veditor-area i.ri-restart-line").click(() => {
       window.location.reload();
       // 写入状态至cookie

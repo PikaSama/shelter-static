@@ -5,7 +5,8 @@
  Description: Loader of custom config.
  */
 (async () => {
-    const sleep = (ms,func) => {
+    // 延迟执行函数
+    const delay = (ms,func) => {
         return new Promise(resolve => {
             setTimeout(() => {
                 if (typeof func == "function"){
@@ -15,7 +16,7 @@
             },ms);
         });
     }
-    await sleep(500);
+    await delay(500);
     // 新人标识
     const newviewer = docCookies.hasItem("newbie");
     // 自定义配置文件标识
@@ -38,14 +39,14 @@
     // --- 函数区 ---
     // 侧边栏背景
     const sideBar = async () => {
-        await sleep(50);
+        await delay(50);
         if (sidebar == "0" && ua != "pc") {
             palette.shadowRoot.querySelectorAll("a")[rtheme].click();
         }
     }
     // 监听主题点击事件函数，代码简化效率中等
-    const paletteListener = (eq,mode) => {
-        if (mode == "day") {
+    const paletteListener = {
+        day: eq => {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
@@ -53,8 +54,8 @@
                 // 回调主题
                 rtheme = eq;
             });
-        }
-        else if (mode == "night") {
+        },
+        night: eq => {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
@@ -62,8 +63,8 @@
                 // 回调主题
                 rtheme = eq;
             });
-        }
-        else if (mode == "accent") {
+        },
+        accent: eq => {
             palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
                 sideBar();
             });
@@ -167,27 +168,27 @@
     // ----------
     // --- 代码区 ---
     // 监听调色盘主题和强调色的点击事件
-    paletteListener(0,"day");
-    paletteListener(2,"day");
-    paletteListener(3,"day");
-    paletteListener(4,"day");
-    paletteListener(1,"night");
-    paletteListener(5,"accent");
-    paletteListener(6,"accent");
-    paletteListener(7,"accent");
-    paletteListener(8,"accent");
-    paletteListener(9,"accent");
-    paletteListener(10,"accent");
-    paletteListener(11,"accent");
-    paletteListener(12,"accent");
-    paletteListener(13,"accent");
-    paletteListener(14,"accent");
-    paletteListener(15,"accent");
-    paletteListener(16,"accent");
-    paletteListener(17,"accent");
+    paletteListener.day(0);
+    paletteListener.night(1);
+    paletteListener.day(2);
+    paletteListener.day(3);
+    paletteListener.day(4);
+    paletteListener.accent(5);
+    paletteListener.accent(6);
+    paletteListener.accent(7);
+    paletteListener.accent(8);
+    paletteListener.accent(9);
+    paletteListener.accent(10);
+    paletteListener.accent(11);
+    paletteListener.accent(12);
+    paletteListener.accent(13);
+    paletteListener.accent(14);
+    paletteListener.accent(15);
+    paletteListener.accent(16);
+    paletteListener.accent(17);
     // 检测ua
     checkUA();
     // 加载配置
-    await sleep(500,loadconfig);
+    await delay(500,loadconfig);
     // --------------
 })();
