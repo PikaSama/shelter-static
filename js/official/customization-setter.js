@@ -86,7 +86,7 @@
             $("input#live2d_" + eq).click(() => {
                 live2d = eq;
             });
-        }
+        },
         wordcount: eq => {
             $("input#wordcount_" + eq).click(() => {
                 wordcountMode = eq;
