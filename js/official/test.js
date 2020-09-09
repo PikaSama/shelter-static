@@ -12,13 +12,11 @@ const sleep = (ms,func) => {
                 console.log("yes");
                 func();
             }
-            else {
-                console.log("no");
-            }
             resolve();
         },ms);
     });
 }
+/*
 let b = 1;
 const a = () => {
     return new Promise((resolve,reject) => {
@@ -33,33 +31,33 @@ const a = () => {
 
 async function c(){await sleep(3000,a);}
 c();
-/* Same
+ Same
     a().then(console.log,console.error);
- */
-//a().then(console.log).catch(console.error);
 
-/*
+    a().then(console.log).catch(console.error);
+*/
 let texts = "";
 const yiyan = () => {
     fetch('https://v1.hitokoto.cn?c=i')
         .then(response => response.json())
         .then(data => {
-            texts = texts + data.hitokoto.substr(0,data.hitokoto.length - 1) + "/";
-            texts = texts.replace(/，/g,"，^200");
-            texts = texts.replace(/。/g,"。^200");
-            texts = texts.replace(/？/g,"？^200");
+            data.hitokoto = data.hitokoto.substr(0,data.hitokoto.length - 1);
+            data.hitokoto = data.hitokoto.replace(/，/g,"，^200");
+            data.hitokoto = data.hitokoto.replace(/。/g,"。^200");
+            data.hitokoto = data.hitokoto.replace(/？/g,"？^200");
+            data.hitokoto = data.hitokoto.replace(/！/g,"！^200");
+            data.hitokoto = data.hitokoto.replace(/；/g,"；^200");
+            texts = texts + data.hitokoto + "/";
             console.log(texts);
         })
         .catch(console.error);
 }
-yiyan();
-let f = async () => {
+let xunhuan = async () => {
     for (let i = 0;i < 5;i++){
         yiyan();
     }
     await sleep(500);
-    texts = texts.split("/");
-    texts.length = 5;
+    texts = texts.split("/").pop();
     console.log(texts);
 }
- */
+xunhuan();
