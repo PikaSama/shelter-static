@@ -36,6 +36,7 @@ c();
 
     a().then(console.log).catch(console.error);
 */
+/*
 let texts = "";
 const yiyan = () => {
     fetch('https://v1.hitokoto.cn?c=i')
@@ -61,3 +62,14 @@ let xunhuan = async () => {
     console.log(texts);
 }
 xunhuan();
+ */
+const a = {
+    log: () => {
+        console.log("hello");
+    },
+    llog: () => {
+        a.log();
+        console.log("world!");
+    }
+}
+a.llog();

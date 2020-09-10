@@ -37,36 +37,37 @@
     let rtheme;
     let ua;
     // --- 函数区 ---
-    // 侧边栏背景
-    const sideBar = async () => {
-        await delay(50);
-        if (sidebar == "0" && ua != "pc") {
-            palette.shadowRoot.querySelectorAll("a")[rtheme].click();
-        }
-    }
     // 监听主题点击事件函数，代码简化效率中等
-    const paletteListener = {
-        day: eq => {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
+    const paletteEvent = {
+        click: index => {
+            palette.shadowRoot.querySelectorAll("a")[index].click();
+        },
+        listen: (index,func) => {
+            palette.shadowRoot.querySelectorAll("a")[index].addEventListener("click",func);
+        },
+        accent: index => {
+            paletteEvent.listen(index,() => {
+                if (sidebar == "0" && ua != "pc") {
+                    paletteEvent.click(rtheme);
+                }
+            });
+        },
+        day: index => {
+            paletteEvent.listen(index,() => {
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
                 $("textarea#mvsys-night").attr("id","mvsys");
                 // 回调主题
-                rtheme = eq;
+                rtheme = index;
             });
         },
-        night: eq => {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
+        night: index => {
+            paletteEvent.listen(index,() => {
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
                 $("textarea#mvsys").attr("id","mvsys-night");
                 // 回调主题
-                rtheme = eq;
-            });
-        },
-        accent: eq => {
-            palette.shadowRoot.querySelectorAll("a")[eq].addEventListener("click", () => {
-                sideBar();
+                rtheme = index;
             });
         }
     }
@@ -94,11 +95,11 @@
         // 如果启用黑暗模式且处于工作时间
         if (autoNight == "1" && (time >= 19 || time <= 5)) {
             // 是，切换黑暗主题
-            palette.shadowRoot.querySelectorAll("a")[1].click();
+            paletteEvent.click(1);
         }
         // 否，切换设置的默认主题
         else {
-            palette.shadowRoot.querySelectorAll("a")[theme].click();
+            paletteEvent.click(theme);
         }
     }
     // 默认强调色
@@ -107,16 +108,16 @@
         let widget = parseInt(docCookies.getItem("default_theme_widget"));
         // 判断是否设置了强调色
         if (widget == 0) {
-            palette.shadowRoot.querySelectorAll("a")[10].click();
+            paletteEvent.click(10);
         }
         else if (widget > 0 && widget < 6) {
             // 是，切换强调色
             widget = widget + 4;
-            palette.shadowRoot.querySelectorAll("a")[widget].click();
+            paletteEvent.click(widget);
         }
         else if (widget >= 6) {
             widget = widget + 5;
-            palette.shadowRoot.querySelectorAll("a")[widget].click();
+            paletteEvent.click(widget);
         }
     }
     // 点击特效
@@ -145,19 +146,16 @@
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-    const loadRes = async () => {
-        nightMode_And_Theme();
-        widget();
-        cEffect();
-        l2d();
-    }
     // 根据配置文件加载内容
     const loadconfig = () => {
         // 判断是否有配置文件且不是新人
         if (customStat == true && newviewer == true) {
             // 是，调用函数
             sidebar = docCookies.getItem("sidebar_widget_background");
-            loadRes();
+            nightMode_And_Theme();
+            widget();
+            cEffect();
+            l2d();
         }
         // 不是，插入默认的内容
         else {
@@ -168,27 +166,32 @@
     // ----------
     // --- 代码区 ---
     // 监听调色盘主题和强调色的点击事件
-    paletteListener.day(0);
-    paletteListener.night(1);
-    paletteListener.day(2);
-    paletteListener.day(3);
-    paletteListener.day(4);
-    paletteListener.accent(5);
-    paletteListener.accent(6);
-    paletteListener.accent(7);
-    paletteListener.accent(8);
-    paletteListener.accent(9);
-    paletteListener.accent(10);
-    paletteListener.accent(11);
-    paletteListener.accent(12);
-    paletteListener.accent(13);
-    paletteListener.accent(14);
-    paletteListener.accent(15);
-    paletteListener.accent(16);
-    paletteListener.accent(17);
+    paletteEvent.day(0);
+    paletteEvent.night(1);
+    paletteEvent.day(2);
+    paletteEvent.day(3);
+    paletteEvent.day(4);
+    paletteEvent.accent(5);
+    paletteEvent.accent(6);
+    paletteEvent.accent(7);
+    paletteEvent.accent(8);
+    paletteEvent.accent(9);
+    paletteEvent.accent(10);
+    paletteEvent.accent(11);
+    paletteEvent.accent(12);
+    paletteEvent.accent(13);
+    paletteEvent.accent(14);
+    paletteEvent.accent(15);
+    paletteEvent.accent(16);
+    paletteEvent.accent(17);
     // 检测ua
     checkUA();
     // 加载配置
-    await delay(500,loadconfig);
+    if (palette == null) {
+        await delay(1500,loadconfig);
+    }
+    else {
+        await delay(500,loadconfig);
+    }
     // --------------
 })();
