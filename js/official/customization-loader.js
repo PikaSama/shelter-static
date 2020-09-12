@@ -46,8 +46,9 @@
             palette.shadowRoot.querySelectorAll("a")[index].addEventListener("click",func);
         },
         accent: index => {
-            paletteEvent.listen(index,() => {
+            paletteEvent.listen(index,async () => {
                 if (sidebar == "0" && ua != "pc") {
+                    await delay(50);
                     paletteEvent.click(rtheme);
                 }
             });

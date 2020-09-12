@@ -19,11 +19,13 @@ setTimeout(() => {
     if ((custom == true && mengxin == true) && wordcount == "1") {
         // 是，加载js
         // 为方便测试，默认加载debug版
-        bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-code-debug.js"></script>');
+        //bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-code-debug.min.js"></script>');
+        bodyPlace.append('<script src="//zorin.beaa.cn/test/wordcount-code-debug.min.js"></script>');
     }
     // 否，加载默认js
     // 为方便测试，默认加载debug版
     else {
-        bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-debug.js"></script>');
+        //bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-debug.min.js"></script>');
+        bodyPlace.append('<script src="//zorin.beaa.cn/test/wordcount-debug.min.js"></script>');
     }
 },1000);

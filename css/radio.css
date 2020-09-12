@@ -224,7 +224,7 @@ textarea#mvsys {
     padding-top: 8px;
     padding-left: 12px;
     border-radius: 20px;
-    widows: 95%;
+    width: 95%;
     transition: all 0.5s;
 }
 
