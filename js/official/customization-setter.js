@@ -49,9 +49,15 @@
         docCookies.setItem(name, vari, Infinity, "/", "shelter.beaa.cn", true);
     }
     // 插入文字和选项函数，代码简化效率中等
-    const addText = (id,vari,title,eq,text) => {
-        // 插入文字和选项
-        $(text).insertAfter(title + ":eq(" + eq +")");
+    const addText = {
+        h2: (eq,text) => {
+            $(text).insertAfter(h2title + ":eq(" + eq + ")");
+        },
+        h3: (eq,text) => {
+            $(text).insertAfter(h3title + ":eq(" + eq + ")");
+        }
+    }
+    const addChecked = (id,vari) => {
         // 按照配置为按钮添加已选属性
         $("input#" + id + "_" + vari).attr("checked","");
     }
@@ -108,26 +114,26 @@
     const darkmode = () => {
         // 读取配置
         autoNight = docCookies.getItem("auto_night");
-        let text = '<p>是否自动切换黑暗模式</p><p>注意：若开启此选项，在黑暗模式的工作时间内将会覆盖默认主题，设置为黑暗主题</p><p>黑暗模式时间段：19:00~6:00</p><div class="input-radio"><input id="autonight_1"type="radio"name="autonight"/><label for="autonight_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="autonight_0"type="radio"name="autonight"/><label for="autonight_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("autonight",autoNight,h3title,0,text);
+        addText.h3(0,'<p>是否自动切换黑暗模式</p><p>注意：若开启此选项，在黑暗模式的工作时间内将会覆盖默认主题，设置为黑暗主题</p><p>黑暗模式时间段：19:00~6:00</p><div class="input-radio"><input id="autonight_1"type="radio"name="autonight"/><label for="autonight_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="autonight_0"type="radio"name="autonight"/><label for="autonight_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("autonight",autoNight);
     }
     // 默认主题
     const defaultheme = () => {
         defaultTheme = docCookies.getItem("default_theme");
-        let text = '<p>默认的主题样式，共3种可选</p><div class="input-radio"><input id="theme_0"type="radio"name="theme"/><label for="theme_0"><span>默认&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_1"type="radio"name="theme"/><label for="theme_1"><span>黑暗&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_2"type="radio"name="theme"/><label for="theme_2"><span>樱花&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_3"type="radio"name="theme"/><label for="theme_3"><span>雨滴&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_4"type="radio"name="theme"/><label for="theme_4"><span>陈年旧书&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("theme",defaultTheme,h3title,1,text);
+        addText.h3(1,'<p>默认的主题样式，共3种可选</p><div class="input-radio"><input id="theme_0"type="radio"name="theme"/><label for="theme_0"><span>默认&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_1"type="radio"name="theme"/><label for="theme_1"><span>黑暗&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_2"type="radio"name="theme"/><label for="theme_2"><span>樱花&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_3"type="radio"name="theme"/><label for="theme_3"><span>雨滴&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="theme_4"type="radio"name="theme"/><label for="theme_4"><span>陈年旧书&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("theme",defaultTheme);
     }
     // 默认强调色
     const defaultwidget = () => {
         defaultWidget = docCookies.getItem("default_theme_widget");
-        let text = '<p>默认的强调色主题，修改行内代码块，小圆点部件，按钮激活色，滚动条颜色等，可与上面的主题进行搭配，共有12种选择</p><p>注意：背景指侧边栏背景，仅适用于移动端，无特别标注的强调色的背景为纯色背景</p><div class="input-radio"><input id="widget_0"type="radio"name="widget"/><label for="widget_0"><span>默认(清新蓝)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_1"type="radio"name="widget"/><label for="widget_1"><span>活力橙(黑眼镜橙色底背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_2"type="radio"name="widget"/><label for="widget_2"><span>DDの桃(粉色渐变背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_3"type="radio"name="widget"/><label for="widget_3"><span>夜の海(黑色海洋背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_4"type="radio"name="widget"/><label for="widget_4"><span>基佬紫&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_5"type="radio"name="widget"/><label for="widget_5"><span>夜空蓝&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_6"type="radio"name="widget"/><label for="widget_6"><span>天依蓝&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_7"type="radio"name="widget"/><label for="widget_7"><span>奥托绿&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_8"type="radio"name="widget"/><label for="widget_8"><span>清新绿&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_9"type="radio"name="widget"/><label for="widget_9"><span>清新橙&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_10"type="radio"name="widget"/><label for="widget_10"><span>普通橙&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_11"type="radio"name="widget"/><label for="widget_11"><span>马鞍棕&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_12"type="radio"name="widget"/><label for="widget_12"><span>酷炫黑&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("widget",defaultWidget,h3title,2,text);
+        addText.h3(2,'<p>默认的强调色主题，修改行内代码块，小圆点部件，按钮激活色，滚动条颜色等，可与上面的主题进行搭配，共有12种选择</p><p>注意：背景指侧边栏背景，仅适用于移动端，无特别标注的强调色的背景为纯色背景</p><div class="input-radio"><input id="widget_0"type="radio"name="widget"/><label for="widget_0"><span>默认(清新蓝)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_1"type="radio"name="widget"/><label for="widget_1"><span>活力橙(黑眼镜橙色底背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_2"type="radio"name="widget"/><label for="widget_2"><span>DDの桃(粉色渐变背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_3"type="radio"name="widget"/><label for="widget_3"><span>夜の海(黑色海洋背景)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_4"type="radio"name="widget"/><label for="widget_4"><span>基佬紫&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_5"type="radio"name="widget"/><label for="widget_5"><span>夜空蓝&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_6"type="radio"name="widget"/><label for="widget_6"><span>天依蓝&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_7"type="radio"name="widget"/><label for="widget_7"><span>奥托绿&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_8"type="radio"name="widget"/><label for="widget_8"><span>清新绿&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_9"type="radio"name="widget"/><label for="widget_9"><span>清新橙&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_10"type="radio"name="widget"/><label for="widget_10"><span>普通橙&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_11"type="radio"name="widget"/><label for="widget_11"><span>马鞍棕&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="widget_12"type="radio"name="widget"/><label for="widget_12"><span>酷炫黑&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("widget",defaultWidget);
     }
     // 侧边栏背景
     const sidebarBG = () => {
         sidebarBackground = docCookies.getItem("sidebar_widget_background");
-        let text = '<p>使用强调色时是否更改侧边栏的背景为强调色自带的背景</p><p>注意：此选项仅针对移动端，PC端设置此选项无效</p><div class="input-radio"><input id="sidebar_1" type="radio" name="sidebar" /><label for="sidebar_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="sidebar_0" type="radio" name="sidebar" /><label for="sidebar_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("sidebar",sidebarBackground,h3title,3,text);
+        addText.h3(3,'<p>使用强调色时是否更改侧边栏的背景为强调色自带的背景</p><p>注意：此选项仅针对移动端，PC端设置此选项无效</p><div class="input-radio"><input id="sidebar_1" type="radio" name="sidebar" /><label for="sidebar_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="sidebar_0" type="radio" name="sidebar" /><label for="sidebar_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("sidebar",sidebarBackground);
     }
     // 表情包
     const mvbqb = () => {
@@ -138,20 +144,20 @@
     // 点击特效
     const clickeffect = () => {
         clickEffect = docCookies.getItem("click_effect");
-        let text = '<p>默认的点击特效，共三种可选</p><div class="input-radio"><input id="effect_0" type="radio" name="clickeffect" /><label for="effect_0"><span>爱心&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_1" type="radio" name="clickeffect" /><label for="effect_1"><span>粒子波动&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_2" type="radio" name="clickeffect" /><label for="effect_2"><span>粒子爆炸&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("effect",clickEffect,h2title,3,text);
+        addText.h2(3,'<p>默认的点击特效，共三种可选</p><div class="input-radio"><input id="effect_0" type="radio" name="clickeffect" /><label for="effect_0"><span>爱心&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_1" type="radio" name="clickeffect" /><label for="effect_1"><span>粒子波动&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_2" type="radio" name="clickeffect" /><label for="effect_2"><span>粒子爆炸&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("effect",clickEffect);
     }
     // Live2d看板娘
     const live2dGirl = () => {
         live2d = docCookies.getItem("live2d");
-        let text = '<p>是否启用Live2d看板娘</p><p>呐呐，这么Kawaii的看板娘，你不会关掉的，对吧对吧?</p><div class="input-radio"><input id="live2d_1" type="radio" name="live2d" /><label for="live2d_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="live2d_0" type="radio" name="live2d" /><label for="live2d_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("live2d",live2d,h2title,4,text);
+        addText.h2(4,'<p>是否启用Live2d看板娘</p><p>呐呐，这么Kawaii的看板娘，你不会关掉的，对吧对吧?</p><div class="input-radio"><input id="live2d_1" type="radio" name="live2d" /><label for="live2d_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="live2d_0" type="radio" name="live2d" /><label for="live2d_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("live2d",live2d);
     }
     // 字数统计
     const wordCount = () => {
         wordcountMode = docCookies.getItem("wordcount_mode");
-        let text = '<p>字数统计的显示样式</p><div class="input-radio"><input id="wordcount_0" type="radio" name="wordcount" /><label for="wordcount_0"><span>正文字数和代码字符数独立&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1" type="radio" name="wordcount" /><label for="wordcount_1"><span>正文字数包含代码字符数(会像这样注明包含多少字符数)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>';
-        addText("wordcount",wordcountMode,h2title,5,text);
+        addText.h2(5,'<p>字数统计的显示样式</p><div class="input-radio"><input id="wordcount_0" type="radio" name="wordcount" /><label for="wordcount_0"><span>正文字数和代码字符数独立&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1" type="radio" name="wordcount" /><label for="wordcount_1"><span>正文字数包含代码字符数(会像这样注明包含多少字符数)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("wordcount",wordcountMode);
     }
     // 按钮黑暗样式
     const darkStyle = () => {
