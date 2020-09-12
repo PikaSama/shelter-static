@@ -131,11 +131,13 @@
         }
         else if (clickeffect == "1") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script>');
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb1.js"></script>');
+            //bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb1.js"></script>');
+            bodyInsert.append('<script src="//zorin.beaa.cn/test/cb1.js"></script>');
         }
         // clickeffect == "2"
         else {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
+            //bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/cb2.js"></script>');
+            bodyInsert.append('<script src="//zorin.beaa.cn/test/cb2.js"></script>');
         }
     }
     // live2d看板娘
