@@ -18,8 +18,8 @@
     }
     await delay(1000);
     // 正文内h2,h3标题
-    const h2title = ".φbi.φy.φg h2";
-    const h3title = ".φbi.φy.φg h3";
+    const h2title = ".φbk.φh.φz h2";
+    const h3title = ".φbk.φh.φz h3";
     // 页面路径
     const lct = window.location.pathname;
     // 插入css的地方

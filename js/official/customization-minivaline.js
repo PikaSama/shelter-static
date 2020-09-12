@@ -22,7 +22,9 @@
   // 自定义配置标识
   const custom = docCookies.hasItem("custom");
   // 插入js的位置
-  const jsPlace = $(".φbz.φy .φbl");
+  const jsPlace = $(".φbz.φh .φbh");
+  // 评论区位置
+  const mvfix = $(".φbz.φh");
   // 评论重载状态
   const isreload = docCookies.getItem("mvreload");
   // 页面路径
@@ -41,6 +43,8 @@
     }
     // 添加重载按钮
     $("div.veditor-area").append('<i class="ri-restart-line"></i>');
+    // 设置显示层级
+    mvfix.attr("style","z-index:0;");
     // 添加按钮监听事件
     await delay(500);
     $("div.veditor-area i.ri-restart-line").click(() => {

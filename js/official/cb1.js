@@ -20,7 +20,7 @@
     // 静态资源版本
     const ver = "1.3.12";
     // is-a元素位置，整个页面
-    const canvasplace = $("[class='φbm φv']");
+    const canvasplace = $(".φbm.φk");
     // 插入canvas
     canvasplace.prepend('<canvas class="fireworks"></canvas><style>.fireworks{position:fixed;left:0;top:0;z-index:99999;pointer-events:none}</style>');
     await delay(500);

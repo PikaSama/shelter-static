@@ -2,7 +2,7 @@
  Author: Zorin
  Github: https://github.com/PikaSama
  License: GPL-3.0 License
- Description: Referenced to hexo-wordcount.
+ Description: A wordcount script, referenced to hexo-wordcount.
  */
 (async () => {
     // 延迟执行函数
@@ -18,18 +18,18 @@
     }
     await delay(100);
     // 文章信息位置
-    const loading = $("[class='φgj φo']");
+    const info = $(".φgj.φr");
     // 插入加载提示
-    loading.append('<span class="load_wordcount">Loading...</span>');
+    info.append('<span class="load_wordcount">Loading...</span>');
     await delay(1000);
     // 获取正文字数
-    let words = document.querySelector(".φbi.φy.φg").innerText.length;
+    let words = document.querySelector(".φbk.φh.φz").innerText.length;
     // debug
     // console.log(document.querySelector("article").innerText);
     // console.log(words);
     // ---
     // 获取正文内图片的数量
-    let imgs = $(".φbi.φy.φg img").length;
+    let imgs = $(".φbk.φh.φz img").length;
     // debug
     // console.log(imgs);
     // ---
@@ -102,15 +102,13 @@
     }
     // 删除加载提示
     $("[class='load_wordcount']").remove();
-    // 文章信息位置
-    const countplace = $("[class='φgj φo']");
     // 插入字数统计
-    countplace.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
+    info.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
     // 是否有代码
     if (codelist.length > 0) {
         // 是，插入代码统计
-        countplace.append('<span class="codes">&nbsp;&nbsp;<i class="ri-code-box-line"></i>' + code + '</span>');
+        info.append('<span class="codes">&nbsp;&nbsp;<i class="ri-code-box-line"></i>' + code + '</span>');
     }
     // 插入阅读时间
-    countplace.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
+    info.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
 })();
