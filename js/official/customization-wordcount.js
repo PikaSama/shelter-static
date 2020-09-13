@@ -28,4 +28,4 @@ setTimeout(() => {
         //bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-debug.min.js"></script>');
         bodyPlace.append('<script src="//zorin.beaa.cn/test/wordcount-debug.min.js"></script>');
     }
-},1000);
+},600);
