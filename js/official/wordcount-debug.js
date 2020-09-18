@@ -5,17 +5,6 @@
  Description: A wordcount script, referenced to hexo-wordcount.
  */
 (async () => {
-    // 延迟执行函数
-    const delay = (ms,func) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                if (typeof func == "function"){
-                    func();
-                }
-                resolve();
-            },ms);
-        });
-    }
     await delay(100);
     // 文章信息位置
     const info = $(".φgj.φr");

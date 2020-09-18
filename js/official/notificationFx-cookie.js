@@ -5,17 +5,6 @@
  Description: Notification system, including notification for newbie and annoucement features.
  */
 (async () => {
-    // 延迟执行函数
-    const delay = (ms,func) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                if (typeof func == "function"){
-                    func();
-                }
-                resolve();
-            },ms);
-        });
-    }
     await delay(1000);
     // 新人标识
     const newv = docCookies.hasItem("newbie");

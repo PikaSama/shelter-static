@@ -5,17 +5,6 @@
  Description: 移植于主题Ayer
  */
 (async () => {
-    // 延迟执行函数
-    const delay = (ms,func) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                if (typeof func == "function"){
-                    func();
-                }
-                resolve();
-            },ms);
-        });
-    }
     await delay(500);
     // 静态资源版本
     const ver = "1.3.12";

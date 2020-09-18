@@ -5,17 +5,6 @@
  Description: Custom settings for MiniValine.
  */
 (async () => {
-  // 延迟执行函数
-  const delay = (ms,func) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            if (typeof func == "function"){
-                func();
-            }
-            resolve();
-        },ms);
-    });
-  }
   await delay(500);
   // 新人标识
   const iscommon = docCookies.hasItem("newbie");

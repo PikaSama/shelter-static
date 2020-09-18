@@ -5,17 +5,6 @@
  Description: Setter of custom config page.
  */
 (async () => {
-    // 延迟执行函数
-    const delay = (ms,func) => {
-        return new Promise(resolve => {
-            setTimeout(() => {
-                if (typeof func == "function"){
-                    func();
-                }
-                resolve();
-            },ms);
-        });
-    }
     await delay(1000);
     // 正文内h2,h3标题
     const h2title = ".φbk.φh.φz h2";
