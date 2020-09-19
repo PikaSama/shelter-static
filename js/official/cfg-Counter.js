@@ -6,17 +6,17 @@
  */
 setTimeout(() => {
     // 新人标识
-    const mengxin = docCookies.hasItem("newbie");
+    const mengxin = localStorage.getItem("newbie");
     // 自定义配置文件标识
-    const custom = docCookies.hasItem("custom");
+    const custom = localStorage.getItem("custom");
     // 静态资源版本
     const ver = "1.3.17";
     // 插入js的地方
     const bodyPlace = $("body");
     // 读取配置
-    const wordcount = docCookies.getItem("wordcount_mode");
+    const wordcount = localStorage.getItem("wordcount_mode");
     // 判断是否有配置文件以及不是新人，且选项为“1"
-    if ((custom == true && mengxin == true) && wordcount == "1") {
+    if ((custom != null && mengxin != null) && wordcount == "1") {
         // 是，加载js
         // 为方便测试，默认加载debug版
         //bodyPlace.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/wordcount-code-debug.min.js"></script>');

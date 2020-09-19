@@ -7,9 +7,9 @@
 (async () => {
     await delay(500);
     // 新人标识
-    const newviewer = docCookies.hasItem("newbie");
+    const newviewer = localStorage.getItem("newbie");
     // 自定义配置文件标识
-    const customStat = docCookies.hasItem("custom");
+    const customStat = localStorage.getItem("custom");
     // 插入css的地方
     const headInsert = $("head");
     // 插入js的地方
@@ -44,7 +44,7 @@
         },
         day: index => {
             paletteEvent.listen(index,() => {
-                docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
+                localStorage.setItem("night", "0");
                 $(".input-radio-night").attr("class","input-radio");
                 $("textarea#mvsys-night").attr("id","mvsys");
                 $(".φbh").removeAttr("id");
@@ -54,7 +54,7 @@
         },
         night: index => {
             paletteEvent.listen(index,() => {
-                docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
+                localStorage.setItem("night", "1");
                 $(".input-radio").attr("class","input-radio-night");
                 $("textarea#mvsys").attr("id","mvsys-night");
                 $(".φbh").attr("id","darkmode");
@@ -80,8 +80,8 @@
     // 黑暗模式 & 默认主题
     const nightMode_And_Theme = () => {
         // 读取配置
-        autoNight = docCookies.getItem("auto_night");
-        theme = parseInt(docCookies.getItem("default_theme"));
+        autoNight = localStorage.getItem("auto_night");
+        theme = parseInt(localStorage.getItem("default_theme"));
         // 获取当前时间
         let time = new Date().getHours();
         // 如果启用黑暗模式且处于工作时间
@@ -97,7 +97,7 @@
     // 默认强调色
     const widget = () => {
         // 读取配置
-        let widget = parseInt(docCookies.getItem("default_theme_widget"));
+        let widget = parseInt(localStorage.getItem("default_theme_widget"));
         // 判断是否设置了强调色
         if (widget == 0) {
             paletteEvent.click(10);
@@ -115,7 +115,7 @@
     // 点击特效
     const cEffect = () => {
         // 读取配置
-        let clickeffect = docCookies.getItem("click_effect");
+        let clickeffect = localStorage.getItem("click_effect");
         // 判断选项，加载指定文件
         if (clickeffect == "0") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
@@ -134,7 +134,7 @@
     // live2d看板娘
     const l2d = () => {
         // 读取配置
-        let live2d = docCookies.getItem("live2d");
+        let live2d = localStorage.getItem("live2d");
         // 如果启用，加载文件
         if (live2d == "1") {
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
@@ -143,9 +143,9 @@
     // 根据配置文件加载内容
     const loadconfig = () => {
         // 判断是否有配置文件且不是新人
-        if (customStat == true && newviewer == true) {
+        if (customStat != null && newviewer != null) {
             // 是，调用函数
-            sidebar = docCookies.getItem("sidebar_widget_background");
+            sidebar = localStorage.getItem("sidebar_widget_background");
             nightMode_And_Theme();
             widget();
             cEffect();

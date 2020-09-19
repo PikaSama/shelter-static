@@ -14,15 +14,15 @@
   async function main(){
     await delay(500);
     // 新人标识
-    const iscommon = docCookies.hasItem("newbie");
+    const iscommon = localStorage.getItem("newbie");
     // 自定义配置标识
-    const custom = docCookies.hasItem("custom");
+    const custom = localStorage.getItem("custom");
     // 插入js的位置
     const jsPlace = $(".φbz.φh .φbh");
     // 评论区位置
     const mvfix = $(".φbz.φh");
     // 评论重载状态
-    const isreload = docCookies.getItem("mvreload");
+    const isreload = localStorage.getItem("mvreload");
     // 页面路径
     const lct = window.location.pathname;
     // 插入元素
@@ -46,22 +46,22 @@
       $("div.veditor-area i.ri-restart-line").click(() => {
         window.location.reload();
         // 写入状态至cookie
-        docCookies.setItem("mvreload", "1" , Infinity, "/", "shelter.beaa.cn", true);
+        localStorage.setItem("mvreload", "1");
       });
       // 如果重载状态为真
       if (isreload == "1") {
         // 平滑移动至评论页面
         document.querySelector("div#mvcomments").scrollIntoView({behavior:"smooth"});
         // 写入状态至cookie
-        docCookies.setItem("mvreload", "0" , Infinity, "/", "shelter.beaa.cn", true);
+        localStorage.setItem("mvreload", "0");
       }
     }
     // ------------
     // --- 代码区 ---
     // 是否有配置文件，且不是新人
-    if (custom == true && iscommon == true) {
+    if (custom != null && iscommon != null) {
       // 表情包列表
-      const bqburl = docCookies.getItem("bqb_url").split("\n");
+      const bqburl = localStorage.getItem("bqb_url").split("\n");
       new MiniValine({
         el: '#mvcomments',
         appId: 'ttYI150SFqRvNaPjk4EVRxiK-MdYXbMMI',

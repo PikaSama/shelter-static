@@ -2,7 +2,7 @@
  Author: Zorin
  Github: https://github.com/PikaSama
  License: GPL-3.0 License
- Description: An extension of notificationFx-cookie.js.
+ Description: An extension of ntfSystem.js.
  */
 (async () => {
     await delay(1000);
