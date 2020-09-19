@@ -24,4 +24,4 @@ setTimeout(() =>{
         smartBackspace: true
     };
     const typed = new Typed("#typedtext", options);
-},1000);
+},500);

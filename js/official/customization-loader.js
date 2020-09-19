@@ -181,11 +181,11 @@
     // 检测ua
     checkUA();
     // 加载配置
-    if (palette == null) {
-        await delay(1500,loadconfig);
+    if (palette != null) {
+        loadconfig();
     }
     else {
-        await delay(500,loadconfig);
+        await delay(1000,loadconfig);
     }
     // --------------
 })();
