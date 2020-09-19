@@ -4,16 +4,18 @@ Github: https://github.com/PikaSama
 License: GPL-3.0 License
 Description: 代码参考于：https://wardzhou.art
  */
-setTimeout(() =>{
+(async()=>{
+    await delay(500);
     // bio位置
     const typeplace = $("[class='φee']");
+    const path = window.location.pathname.substr(0, 6);
     // 插入span
     typeplace.append('<span id="typedtext"></span>');
     // 设置属性
-    typeplace.attr("style","height:3rem; display:block; font-size: 110%;");
+    typeplace.attr("style", "height:3rem; display:block; font-size: 110%;");
     // typed.js配置
     const options = {
-        strings: ["人生是逆流，^200也是随波逐流", "神机妙算皆徒劳，^200千般执念终成空","七月初七，^100淮水竹亭，^100鞘笛相偎，^100无怨无悔"],
+        strings: ["人生是逆流，^200也是随波逐流", "神机妙算皆徒劳，^200千般执念终成空", "七月初七，^100淮水竹亭，^100鞘笛相偎，^100无怨无悔"],
         startDelay: 0,
         backDelay: 1000,
         typeSpeed: 100,
@@ -24,4 +26,7 @@ setTimeout(() =>{
         smartBackspace: true
     };
     const typed = new Typed("#typedtext", options);
-},500);
+    if (path != "/posts") {
+        $("body").append('<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>');
+    }
+})();

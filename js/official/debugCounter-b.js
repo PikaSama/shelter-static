@@ -14,13 +14,13 @@
     // 获取正文字数
     let words = document.querySelector(".φbk.φh.φz").innerText.length;
     // debug
-    // console.log(document.querySelector("article").innerText);
-    // console.log(words);
+    console.log(document.querySelector("article").innerText);
+    console.log(words);
     // ---
     // 获取正文内图片的数量
     let imgs = $(".φbk.φh.φz img").length;
     // debug
-    // console.log(imgs);
+    console.log(imgs);
     // ---
     // 获取所有<meting-js>元素
     let metinglist = document.querySelectorAll("meting-js");
@@ -30,12 +30,12 @@
         for (let i = 0; i < metinglist.length; i++) {
             meting = meting + metinglist[i].innerText.length;
             // debug
-            // console.log(metinglist[i].innerText);
-            // console.log(metinglist[i].innerText.length);
+            console.log(metinglist[i].innerText);
+            console.log(metinglist[i].innerText.length);
         }
     }
     // debug
-    // console.log(meting);
+    console.log(meting);
     // ---
     // 获取所有<figure>元素
     let codelist = document.querySelectorAll("figure");
@@ -45,17 +45,17 @@
         for (let j = 0; j < codelist.length; j++) {
             code = code + codelist[j].innerText.length;
             // debug
-            // console.log(codelist[j].innerText);
-            // console.log(codelist[j].innerText.length);
+            console.log(codelist[j].innerText);
+            console.log(codelist[j].innerText.length);
         }
     }
     // debug
-    // console.log(code);
+    console.log(code);
     // ---
     // 校正字数，正文字数 - 音乐插件字数
     words = words - meting;
     // debug
-    // console.log(words);
+    console.log(words);
     // ---
     // 估算阅读时间，范围：全文
     // 设每分钟阅读文字600字 / 代码800字符 / 图片10张
@@ -97,4 +97,9 @@
     info.append('<span class="words"><i class="ri-edit-2-line"></i>' + words + '</span>');
     // 插入阅读时间
     info.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
+    // 插入访问统计
+    $("[src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js']").remove();
+    $(".φgj.φr").append('&nbsp;&nbsp;<span id="busuanzi_container_page_pv"><i class="ri-eye-line"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;views</span>');
+    await delay(200);
+    $("body").append('<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>');
 })();
