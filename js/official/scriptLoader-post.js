@@ -1,4 +1,4 @@
-$(()=>{
+(()=>{
     let i = setInterval(()=>{
         if(typeof delay != "undefined"){
             clearInterval(i);
@@ -11,4 +11,4 @@ $(()=>{
         $("body").append('<script src="//zorin.beaa.cn/test/customization-wordcount.min.js"></script>');
         $("body").append('<script src="//zorin.beaa.cn/test/customization-minivaline.min.js"></script>');
     }
-});
+})();

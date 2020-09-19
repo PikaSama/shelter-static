@@ -47,6 +47,7 @@
                 docCookies.setItem("night", "0", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio-night").attr("class","input-radio");
                 $("textarea#mvsys-night").attr("id","mvsys");
+                $(".φbh").removeAttr("id");
                 // 回调主题
                 rtheme = index;
             });
@@ -56,6 +57,7 @@
                 docCookies.setItem("night", "1", Infinity, "/", "shelter.beaa.cn", true);
                 $(".input-radio").attr("class","input-radio-night");
                 $("textarea#mvsys").attr("id","mvsys-night");
+                $(".φbh").attr("id","darkmode");
                 // 回调主题
                 rtheme = index;
             });
