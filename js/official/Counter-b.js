@@ -2,7 +2,7 @@
  Author: Zorin
  Github: https://github.com/PikaSama
  License: GPL-3.0 License
- Description: A wordcount script, referenced to hexo-wordcount. (Style B)
+ Description: A simple counting script. (Style B)
  */
 (async () => {
     // 加载提示
@@ -63,30 +63,30 @@
     let readtime = (Math.round((words - code) / 60 + code / 80) + imgs) / 10;
     // 如果字数不到1000，显示原字数
     if (words < 1000) {
-        words = '= ' + words + ' words';
+        words = '&nbsp;' + words + '&nbsp;words';
     }
     // 如果字数≥1000，四舍五入字数，单位改为k，结果保留一位小数
     else {
-        words = '≈ ' + Math.round(words / 100) / 10 + 'k' + ' words';
+        words = '&nbsp;' + Math.round(words / 100) / 10 + 'k' + '&nbsp;words';
     }
     // 如果阅读时间超过1分钟，加复数单位
     if (readtime > 1) {
-        readtime = '≈ ' + readtime + ' mins';
+        readtime = '&nbsp;' + readtime + '&nbsp;mins';
     }
     // 如果阅读时间≤1分钟，加单数单位
     else {
-        readtime = '≈ 1 min';
+        readtime = '&nbsp;1 min';
     }
     // 是否含有代码
     if (codelist.length > 0) {
         // 是
         // 如果代码字符数不到1000，显示原字符数
         if (code < 1000) {
-            code = '= ' + code + ' chars';
+            code = '&nbsp;' + code + '&nbsp;chars';
         }
         // 如果代码字符数≥1000，四舍五入字符数，单位改为k，结果保留一位小数
         else {
-            code = '≈ ' + Math.round(code / 100) / 10 + 'k' + ' chars';
+            code = '&nbsp;' + Math.round(code / 100) / 10 + 'k' + '&nbsp;chars';
         }
         // 添加代码统计至字数统计
         words = words + '&nbsp;&nbsp;(<i class="ri-code-box-line"></i>' + code + ')';
@@ -96,7 +96,7 @@
     // 插入字数统计
     info.append('<span class="words"><i class="ri-edit-2-line"></i>' + words + '</span>');
     // 插入阅读时间
-    info.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-book-open-line"></i>' + readtime + '</span>');
+    info.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-time-line"></i>' + readtime + '</span>');
     // 插入访问统计
     $("[src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js']").remove();
     $(".φgj.φr").append('&nbsp;&nbsp;<span id="busuanzi_container_page_pv"><i class="ri-eye-line"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;views</span>');

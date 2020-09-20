@@ -71,3 +71,30 @@ const delay = (ms,func) => {
         },ms);
     });
 }
+// 确认公告按钮
+const confirmAnnounce = ld => {
+    // 监听按钮点击事件
+    $("a#confirm").click(() => {
+        // 关闭公告通知
+        $(".ns-box.ns-growl.ns-effect-jelly.ns-type-error.ns-show .ns-close").click();
+        // 写入已读日期
+        localStorage.setItem("announcement_date", ld);
+    });
+}
+// 公告通知
+const announce = async (css,ver,lc,ld) => {
+    css.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
+    await delay(1000);
+    let announcement = new NotificationFx({
+        wrapper : document.body,
+        message : '<p>🔔【公告】——2020.8.3<br />叮咚！博客有文章更新啦~<br />更新列表：<br /><a href="/posts/inside-configuration">[持续更新]Inside主题进阶配置</a><br /><br />快去看看吧~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="confirm" href="' + lc + '#cofirmed">确认公告</a></p>',
+        layout : 'growl',
+        effect : 'jelly',
+        type : 'error',
+        ttl : 10000,
+        onClose : function() { return false; },
+        onOpen : function() { return false; }
+    });
+    announcement.show();
+    confirmAnnounce(ld);
+}

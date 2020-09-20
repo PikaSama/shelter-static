@@ -5,7 +5,6 @@
  Description: Setter of custom config page.
  */
 (async () => {
-    await delay(1000);
     // 正文内h2,h3标题
     const h2title = ".φbk.φh.φz h2";
     const h3title = ".φbk.φh.φz h3";
@@ -141,7 +140,7 @@
     // 字数统计
     const wordCount = () => {
         wordcountMode = localStorage.getItem("wordcount_mode");
-        addText.h2(5,'<p>字数统计的显示样式</p><div class="input-radio"><input id="wordcount_0" type="radio" name="wordcount" /><label for="wordcount_0"><span>正文字数和代码字符数独立&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1" type="radio" name="wordcount" /><label for="wordcount_1"><span>正文字数包含代码字符数(会像这样注明包含多少字符数)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addText.h2(5,'<p>统计功能的样式</p><div class="input-radio"><input id="wordcount_0"type="radio"name="wordcount"/><label for="wordcount_0"><span>字数-代码数-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1"type="radio"name="wordcount"/><label for="wordcount_1"><span>字数(包含代码数)-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_2"type="radio"name="wordcount"/><label for="wordcount_2"><span>主题自带样式(简洁)</span></label></div>');
         addChecked("wordcount",wordcountMode);
     }
     // 按钮黑暗样式
@@ -155,10 +154,10 @@
     // 保存按钮
     const save = () => {
         if (night == "1") {
-            $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter(".input-radio-night:eq(28)");
+            $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter(".input-radio-night:eq(29)");
         }
         else {
-            $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter(".input-radio:eq(28)");
+            $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter(".input-radio:eq(29)");
         }
     }
     // 显示保存通知前的判断
@@ -200,7 +199,7 @@
         window.location.reload();
     }
     // 监听选项，保存按钮的点击事件
-    const clickSet = () => {
+    const clickSet = async () => {
         // 选项的监听
         clickListener.darkmode(0);
         clickListener.darkmode(1);
@@ -231,6 +230,7 @@
         clickListener.l2d(1);
         clickListener.wordcount(0);
         clickListener.wordcount(1);
+        clickListener.wordcount(2);
         // 保存按钮的监听
         $(".button-save").click(async () => {
             // 读取输入框内容
@@ -247,12 +247,14 @@
             await savedNotification();
             await savedntf();
         });
+        await delay(2000);
+        $("div.loadAni").hide(1000,"linear");
     }
     // 加载列表A,针对无配置文件的非新人
     const setterA = async () => {
         darkStyle();
         save();
-        clickSet();
+        await clickSet();
     }
     // 加载列表B,针对有配置文件的非新人
     const setterB = async () => {
@@ -266,24 +268,22 @@
         wordCount();
         darkStyle();
         save();
-        clickSet();
+        await clickSet();
     }
     // 适配主题的标题跳转，使用insertAfter()方法
     const setter = async () => {
-        $('<p id="loading">读取用户配置文件中...</p>').insertAfter(h2title + ":eq(0)");
+        $('<div class="loadAni"><div class="loading"><i><span></span><span></span><span></span><span></span><span></span><span></span></i></div></div>').insertAfter(".φfs.φf header");
         // 如果是新人则不显示
         if(newbie == null) {
             await delay(1000);
-            $("p#loading").remove();
             $('<p>读取用户配置文件失败：未满足读取条件，需查看<a href="/help">使用教程</a></p>').insertAfter(h2title + ":eq(0)");
         }
         // 如果不是新人但没有配置文件
         else if(custom == null && newbie != null) {
             await delay(1000);
-            $("p#loading").remove();
             $('<p>用户配置文件为空，已自动创建新配置文件</p><p>如果要修改配置文件，点击保存按钮即可生效</p>').insertAfter(h2title + ":eq(0)");
             // 写入初始配置文件参数，自定义配置文件标识
-            cookie("custom","1");
+            localStorage.setItem("custom","1");
             setCfg();
             // 插入文字和选项
             $('<p>是否自动切换黑暗模式</p><p>注意：若开启此选项，在黑暗模式的工作时间内将会覆盖默认主题，设置为黑暗主题</p><p>黑暗模式时间段：19:00~6:00</p><div class="input-radio"><input id="autonight_1"type="radio"name="autonight"/><label for="autonight_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="autonight_0"type="radio"name="autonight" checked/><label for="autonight_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>').insertAfter(h3title + ":eq(0)");
@@ -293,14 +293,13 @@
             $('<p>你可以自定义评论系统加载的表情包，一行填一个链接，不需要其他符号，以免解析错误</p><center><textarea id="mvsys" rows="10" style="resize: none;"></textarea></center><p>目前博客自带的表情包有以下这些，如果要使用这些表情包，请填入“https://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@latest/” + 表情包名字 即可</p><ul><li><p>BilibiliHotKey：哔哩哔哩热词系列</p></li><li><p>HONKAI3-Crayon：崩坏3 蜡笔日常篇</p></li><li><p>HONKAI3-Daily：崩坏3 日常篇</p></li><li><p>HONKAI3-Durandal-Search： 崩坏3 目标！幽兰黛尔</p></li><li><p>HONKAI3-MEI：崩坏3 芽衣的剑道修行</p></li><li><p>HONKAI3-NEWYEAR-2019：崩坏3 2019新年</p></li><li><p>HONKAI3-Pure：崩坏3 纯色日常篇</p></li><li><p>HONKAI3-Stan：崩坏3 史丹</p></li><li><p>HONKAI3-Star：崩坏3 观星篇</p></li><li><p>HONKAI3-AIChan：崩坏3 爱酱</p></li><li><p>Mafumafu：Mafumafu Animation sticker (cat)</p></li><li><p>Menhera-chan：七濑胡桃系列表情包</p></li><li><p>Sweetie-Bunny：うさみみ少女</p></li><li><p>Coolapk：酷安</p></li><li><p>Arcaea：Arcaea表情包</p></li><li><p>Snow-Miku：Snow Miku雪初音表情包</p></li><li><p>Yurui-Neko：Yurui-Neko表情包</p></li><li><p>bilibilitv：哔哩哔哩小电视系列	</p></li><li><p>bilibili2233：哔哩哔哩2233娘系列</p></li><li><p>aodamiao：aodamiao嗷大喵</p></li></ul><p>如果你想加入自己的表情包，请见<a href="https://github.com/MiniValine/MiniValine/blob/master/.github/FAQ.md#how-to-customize-emoticons">此文档</a></p><p>推荐使用项目 <a href="https://github.com/PikaSama/blog-emoticons/">Blog Emoticons</a>一键生成表情包列表(再次硬广)</p>').insertAfter(h2title + ":eq(2)");
             $('<p>默认的点击特效，共三种可选</p><div class="input-radio"><input id="effect_0" type="radio" name="clickeffect" checked/><label for="effect_0"><span>爱心&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_1" type="radio" name="clickeffect" /><label for="effect_1"><span>粒子波动&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="effect_2" type="radio" name="clickeffect" /><label for="effect_2"><span>粒子爆炸&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>').insertAfter(h2title + ":eq(3)");
             $('<p>是否启用Live2d看板娘</p><p>呐呐，这么Kawaii的看板娘，你不会关掉的，对吧对吧?</p><div class="input-radio"><input id="live2d_1" type="radio" name="live2d" checked/><label for="live2d_1"><span>是&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="live2d_0" type="radio" name="live2d" /><label for="live2d_0"><span>否&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>').insertAfter(h2title + ":eq(4)");
-            $('<p>字数统计的显示样式</p><div class="input-radio"><input id="wordcount_0" type="radio" name="wordcount" checked/><label for="wordcount_0"><span>正文字数和代码字符数独立&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1" type="radio" name="wordcount" /><label for="wordcount_1"><span>正文字数包含代码字符数(会像这样注明包含多少字符数)&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>').insertAfter(h2title + ":eq(5)");
+            $('<p>统计功能的样式</p><div class="input-radio"><input id="wordcount_0"type="radio"name="wordcount" checked/><label for="wordcount_0"><span>字数-代码数-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1"type="radio"name="wordcount"/><label for="wordcount_1"><span>字数(包含代码数)-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_2"type="radio"name="wordcount"/><label for="wordcount_2"><span>主题自带样式(简洁)</span></label></div>').insertAfter(h2title + ":eq(5)");
             $("textarea#mvsys").val(bqb);
             await setterA();
         }
         // 如果不是新人且有配置文件
         else if(custom != null && newbie != null) {
             await delay(1000);
-            $("p#loading").remove();
             $('<p>成功读取配置文件</p><p>如果要修改配置文件，点击保存按钮即可生效</p>').insertAfter(h2title + ":eq(0)");
             await setterB();
         }
