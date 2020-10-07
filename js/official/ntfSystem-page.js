@@ -10,58 +10,50 @@
     let neo = localStorage.getItem("newbie");
     // 页面路径
     const locate = window.location.pathname;
-    // 最新公告日期
-    const ld = "2020.8.3";
     // 插入css的地方
     const cssPlace = $("head");
+    const thumbslider = ".ns-box.ns-other.ns-effect-thumbslider.ns-type-error";
     // 静态资源文件版本
     const ver = "1.3.12";
-    // --- 函数区 ---
-    // 检查是否满足显示公告的条件
-    const checkAnnounce = async () => {
-        // 已读公告日期
-        const ad = localStorage.getItem("announcement_date");
-        // 新人通知
-        const thumbslider = ".ns-box.ns-other.ns-effect-thumbslider.ns-type-error";
-        // 无已读公告或已读公告日期与最新公告日期不符，且不是新人
-        if ((ad == null || ad != ld) && neo != null) {
-            // 判断新人通知是否显示过
-            if (document.querySelector(thumbslider) == null) {
-                // 没有，直接显示公告
-                await announce(cssPlace,ver,locate,ld);
-            }
-            // 如果新人通知还在显示
-            else if (document.querySelector(thumbslider + ".ns-show") != null) {
-                // 加上打断属性，使其淡出
-                $(thumbslider).attr("id","canceled");
-                // 一段时间后删除元素和css
-                await delay(500);
-                $(thumbslider).remove();
-                $("link#thumbslider").remove();
-                await announce(cssPlace,ver,locate,ld);
-            }
-            // 认定新人通知已隐藏
-            else {
-                // 删掉元素和css
-                $(thumbslider).remove();
-                $("link#thumbslider").remove();
-                await announce(cssPlace,ver,locate,ld);
-            }
+    // 初始配置参数
+    let autoNight = "0";
+    let defaultTheme = "0";
+    let defaultWidget = "0";
+    let sidebarBackground = "0";
+    let clickEffect = "0";
+    let live2d = "1";
+    let wordcountMode = "0";
+    let bqb = "https://cdn.jsdelivr.net/npm/alus@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/bilibiliHotKey\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-Daily\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-NEWYEAR-2019\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-AIChan\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/Coolapk";
+    async function checkedNtf() {
+        // 判断新人通知显示状态
+        if (document.querySelector(thumbslider + ".ns-show") != null) {
+            $(thumbslider).attr("id","canceled");
+            await delay(500);
+            $(thumbslider).remove();
+            $("link#thumbslider").remove();
+            await checkedNotification(cssPlace,ver);
+        }
+        else {
+            $(thumbslider).remove();
+            $("link#thumbslider").remove();
+            await checkedNotification(cssPlace,ver);
         }
     }
-    // -----------
-    // --- 代码区 ---
     // 在help页面，是新人
     if (neo == null && locate == "/help") {
-        // 写入新人标识
-        localStorage.setItem("newbie", "0");
-        // 更新新人标识
-        neo = localStorage.getItem("newbie");
-        await checkAnnounce();
+        $('<div class="button-save"><span>已阅<i class="ri-checkbox-circle-line"></i></span></div>').insertAfter(".φbk.φh.φz p:last");
+        $(".button-save").click(async ()=>{
+            $(".button-save").attr("class","button-save-disabled");
+            localStorage.setItem("newbie","0");
+            localStorage.setItem("auto_night",autoNight);
+            localStorage.setItem("default_theme",defaultTheme);
+            localStorage.setItem("default_theme_widget",defaultWidget);
+            localStorage.setItem("sidebar_widget_background",sidebarBackground);
+            localStorage.setItem("click_effect",clickEffect);
+            localStorage.setItem("live2d",live2d);
+            localStorage.setItem("wordcount_mode",wordcountMode);
+            localStorage.setItem("bqb_url",bqb);
+            await delay(600,checkedNtf);
+        });
     }
-    // 在help页面，不是新人
-    else if (neo != null && locate == "/help") {
-        await checkAnnounce();
-    }
-    // ------------
 })();

@@ -8,8 +8,6 @@
     await delay(500);
     // 新人标识
     const newviewer = localStorage.getItem("newbie");
-    // 自定义配置文件标识
-    const customStat = localStorage.getItem("custom");
     // 插入css的地方
     const headInsert = $("head");
     // 插入js的地方
@@ -44,9 +42,9 @@
         },
         day: index => {
             paletteEvent.listen(index,() => {
-                localStorage.setItem("night", "0");
+                localStorage.setItem("cachedTheme",index);
                 $(".input-radio-night").attr("class","input-radio");
-                $("textarea#mvsys-night").attr("id","mvsys");
+                $("textarea.mvsys#night").removeAttr("id");
                 $(".φbh").removeAttr("id");
                 // 回调主题
                 rtheme = index;
@@ -54,9 +52,9 @@
         },
         night: index => {
             paletteEvent.listen(index,() => {
-                localStorage.setItem("night", "1");
+                localStorage.setItem("cachedTheme",index);
                 $(".input-radio").attr("class","input-radio-night");
-                $("textarea#mvsys").attr("id","mvsys-night");
+                $("textarea.mvsys").attr("id","night");
                 $(".φbh").attr("id","darkmode");
                 // 回调主题
                 rtheme = index;
@@ -143,7 +141,7 @@
     // 根据配置文件加载内容
     const loadconfig = () => {
         // 判断是否有配置文件且不是新人
-        if (customStat != null && newviewer != null) {
+        if (newviewer != null) {
             // 是，调用函数
             sidebar = localStorage.getItem("sidebar_widget_background");
             nightMode_And_Theme();

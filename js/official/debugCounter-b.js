@@ -94,7 +94,7 @@
     // 删除加载提示
     $("[class='load_wordcount']").remove();
     // 插入字数统计
-    info.append('<span class="words"><i class="ri-edit-2-line"></i>' + words + '</span>');
+    info.append('<span class="words"><i class="ri-quill-pen-line"></i>' + words + '</span>');
     // 插入阅读时间
     info.append('<span class="readtime">&nbsp;&nbsp;<i class="ri-time-line"></i>' + readtime + '</span>');
     // 插入访问统计
