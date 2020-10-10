@@ -14,6 +14,20 @@ function delay(ms,func) {
         },ms);
     });
 }
+function dynamicType(arr,ts,bs) {
+    const options = {
+        strings: arr,
+        startDelay: 0,
+        backDelay: 1000,
+        typeSpeed: ts || 80,
+        backSpeed: bs || 60,
+        loop: true,
+        showCursor: true,
+        contentType: 'html',
+        smartBackspace: true
+    }
+    const type = new Typed("#typedtext",options);
+}
 function customNtf(options) {
     let myntf = new NotificationFx({
         wrapper: document.body,

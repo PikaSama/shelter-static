@@ -5,4 +5,4 @@
  Description: This is a test & demo file. You can do everything to it.
  As the license says: YOU JUST DO WHAT THE FUCK YOU WANT TO.
  */
-const sleep=(o,l)=>new Promise(e=>{setTimeout(()=>{"function"==typeof l&&(console.log("yes"),l()),e()},o)}),a={log:()=>{console.log("hello")},llog:()=>{a.log(),console.log("world!")}};a.llog();
+console.log("No codes here.");

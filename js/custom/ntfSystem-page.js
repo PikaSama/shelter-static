@@ -24,6 +24,7 @@
     let live2d = "1";
     let wordcountMode = "0";
     let bqb = "https://cdn.jsdelivr.net/npm/alus@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/bilibiliHotKey\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-Daily\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-NEWYEAR-2019\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-AIChan\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/Coolapk";
+    let dynamicText = "0";
     async function checkedNtf() {
         // 判断新人通知显示状态
         if (document.querySelector(thumbslider + ".ns-show") != null) {
@@ -53,6 +54,7 @@
             localStorage.setItem("live2d",live2d);
             localStorage.setItem("wordcount_mode",wordcountMode);
             localStorage.setItem("bqb_url",bqb);
+            localStorage.setItem("dynamic_text",dynamicText);
             await delay(600,checkedNtf);
         });
     }

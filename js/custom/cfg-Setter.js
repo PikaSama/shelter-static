@@ -18,15 +18,15 @@
     const jelly = ".ns-box.ns-growl.ns-effect-jelly.ns-type-error";
     // 新人标识
     const newbie = localStorage.getItem("newbie");
-    // 初始配置文件参数
-    let autoNight = "0";
-    let defaultTheme = "0";
-    let defaultWidget = "0";
-    let sidebarBackground = "0";
-    let clickEffect = "0";
-    let live2d = "1";
-    let wordcountMode = "0";
-    let bqb = "https://cdn.jsdelivr.net/npm/alus@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest\nhttps://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/bilibiliHotKey\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-Daily\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-NEWYEAR-2019\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/HONKAI3-AIChan\nhttps://cdn.jsdelivr.net/gh/PikaSama/blog-emoticons@1.1.2/Coolapk";
+    let autoNight;
+    let defaultTheme;
+    let defaultWidget;
+    let sidebarBackground;
+    let clickEffect;
+    let live2d;
+    let wordcountMode;
+    let bqb;
+    let dynamicText;
     // 插入文字和选项函数，简化代码
     const addText = {
         h2: (eq,text) => {
@@ -76,6 +76,11 @@
             $("input#wordcount_" + eq).click(() => {
                 wordcountMode = eq;
             });
+        },
+        dyntxt: eq => {
+            $("input#dynamic_" + eq).click(() => {
+                dynamicText = eq;
+            });
         }
     }
     if (lct == "/settings") {
@@ -105,6 +110,7 @@
         clickeffect();
         live2dGirl();
         wordCount();
+        dynamictxt();
         style();
         await clickSet();
         await removeLoading();
@@ -158,12 +164,17 @@
         addText.h2(5,'<p>统计功能的样式</p><div class="input-radio"><input id="wordcount_0"type="radio"name="wordcount"/><label for="wordcount_0"><span>字数-代码数-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_1"type="radio"name="wordcount"/><label for="wordcount_1"><span>字数(包含代码数)-阅读时间-访问统计&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="wordcount_2"type="radio"name="wordcount"/><label for="wordcount_2"><span>主题自带样式(简洁)</span></label></div>');
         addChecked("wordcount",wordcountMode);
     }
+    function dynamictxt() {
+        dynamicText = localStorage.getItem("dynamic_text");
+        addText.h2(6,'<p>动态文字来源</p><div class="input-radio"><input id="dynamic_0"type="radio"name="dynamic"/><label for="dynamic_0"><span>博客自带（固定）&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="dynamic_1"type="radio"name="dynamic"/><label for="dynamic_1"><span>一言API（诗句，可变）&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div><div class="input-radio"><input id="dynamic_2"type="radio"name="dynamic"/><label for="dynamic_2"><span>金山词霸API（每日一句，可变）&nbsp;&nbsp;&nbsp;&nbsp;</span></label></div>');
+        addChecked("dynamic",dynamicText);
+    }
     // 选项样式，跟随主题
     function style() {
         // 检测页面主题是否为黑暗
         document.querySelector("is-palette2").shadowRoot.querySelectorAll("a")[parseInt(localStorage.getItem("cachedTheme"))].click();
         console.log("theme clicked"+new Date().getTime());
-        $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter($(":radio:eq(29)").parent());
+        $('<div class="button-save"><span>保存<i class="ri-save-3-line"></i></span></div>').insertAfter($(":radio:eq(32)").parent());
     }
     async function removeLoading() {
         await delay(2000);
@@ -207,6 +218,9 @@
         clickListener.wordcount(0);
         clickListener.wordcount(1);
         clickListener.wordcount(2);
+        clickListener.dyntxt(0);
+        clickListener.dyntxt(1);
+        clickListener.dyntxt(2);
         // 保存按钮的监听
         $(".button-save").click(async () => {
             // 读取输入框内容
@@ -220,6 +234,7 @@
             localStorage.setItem("live2d",live2d);
             localStorage.setItem("wordcount_mode",wordcountMode);
             localStorage.setItem("bqb_url",bqb);
+            localStorage.setItem("dynamic_text",dynamicText);
             // 将按钮设置为关闭状态
             $(".button-save").attr("class","button-save-disabled");
             await savedNotification();

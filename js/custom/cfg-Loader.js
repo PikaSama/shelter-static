@@ -16,14 +16,12 @@
     const palette = document.querySelector("is-palette2");
     // 静态资源版本
     const ver = "1.3.12";
-    // 默认设置
-    let sidebar = "0";
-    let theme = 0;
-    let autoNight = "0";
-    // 声明变量
+    // 需要全局使用的变量
+    let sidebar;
+    let theme;
+    let autoNight;
     let rtheme;
     let ua;
-    // --- 函数区 ---
     // 监听主题点击事件函数，代码简化效率中等
     const paletteEvent = {
         click: index => {
@@ -61,7 +59,37 @@
             });
         }
     }
-    const checkUA = () => {
+    // 监听调色盘主题和强调色的点击事件
+    paletteEvent.day(0);
+    paletteEvent.night(1);
+    paletteEvent.day(2);
+    paletteEvent.day(3);
+    paletteEvent.day(4);
+    function listenerB() {
+        paletteEvent.accent(5);
+        paletteEvent.accent(6);
+        paletteEvent.accent(7);
+        paletteEvent.accent(8);
+        paletteEvent.accent(9);
+        paletteEvent.accent(10);
+        paletteEvent.accent(11);
+        paletteEvent.accent(12);
+        paletteEvent.accent(13);
+        paletteEvent.accent(14);
+        paletteEvent.accent(15);
+        paletteEvent.accent(16);
+        paletteEvent.accent(17);
+    }
+    // 检测ua
+    checkUA();
+    // 加载配置
+    if (palette != null) {
+        loadconfig();
+    }
+    else {
+        await delay(1000,loadconfig);
+    }
+    function checkUA() {
         // 移动端，加载移动端专用css
         if (window.navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)) {
             // headInsert.append('<link href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/radio-mobile.css" rel="stylesheet" />');
@@ -75,8 +103,27 @@
             ua = "pc";
         }
     }
+    // 根据配置文件加载内容
+    function loadconfig() {
+        // 判断是否有配置文件且不是新人
+        if (newviewer != null) {
+            // 是，调用函数
+            sidebar = localStorage.getItem("sidebar_widget_background");
+            nightMode_And_Theme();
+            widget();
+            cEffect();
+            l2d();
+            dynamicTxt();
+            listenerB();
+        }
+        // 不是，插入默认的内容
+        else {
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
+            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
+        }
+    }
     // 黑暗模式 & 默认主题
-    const nightMode_And_Theme = () => {
+    function nightMode_And_Theme() {
         // 读取配置
         autoNight = localStorage.getItem("auto_night");
         theme = parseInt(localStorage.getItem("default_theme"));
@@ -93,7 +140,7 @@
         }
     }
     // 默认强调色
-    const widget = () => {
+    function widget() {
         // 读取配置
         let widget = parseInt(localStorage.getItem("default_theme_widget"));
         // 判断是否设置了强调色
@@ -111,7 +158,7 @@
         }
     }
     // 点击特效
-    const cEffect = () => {
+    function cEffect() {
         // 读取配置
         let clickeffect = localStorage.getItem("click_effect");
         // 判断选项，加载指定文件
@@ -130,7 +177,7 @@
         }
     }
     // live2d看板娘
-    const l2d = () => {
+    function l2d() {
         // 读取配置
         let live2d = localStorage.getItem("live2d");
         // 如果启用，加载文件
@@ -138,52 +185,67 @@
             bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
         }
     }
-    // 根据配置文件加载内容
-    const loadconfig = () => {
-        // 判断是否有配置文件且不是新人
-        if (newviewer != null) {
-            // 是，调用函数
-            sidebar = localStorage.getItem("sidebar_widget_background");
-            nightMode_And_Theme();
-            widget();
-            cEffect();
-            l2d();
+    function dynamicTxt() {
+        const typeplace = $(".φee");
+        let dynText = localStorage.getItem("dynamic_text");
+        // 插入span
+        typeplace.append('<span id="typedtext"></span>');
+        // 设置属性
+        typeplace.attr("style", "height:3rem; display:block; font-size: 110%;");
+        if (dynText == "1") {
+            let contents = "";
+            async function yiyan() {
+                await fetch('https://v1.hitokoto.cn?c=i').then(resp => resp.json()).then(data => {
+                    data.hitokoto = data.hitokoto.slice(0,-1);
+                    data.hitokoto = data.hitokoto.replace(/，/g,"，^200");
+                    data.hitokoto = data.hitokoto.replace(/。/g,"。^200");
+                    data.hitokoto = data.hitokoto.replace(/？/g,"？^200");
+                    data.hitokoto = data.hitokoto.replace(/！/g,"！^200");
+                    data.hitokoto = data.hitokoto.replace(/；/g,"；^200");
+                    contents+=data.hitokoto + "/";
+                }).catch(err => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+            async function run() {
+                for (let i = 0;i < 3;i++) {
+                    await yiyan();
+                }
+            }
+            run().then(()=>{
+                contents = contents.split("/");
+                contents.pop();
+                dynamicType(contents);
+            });
         }
-        // 不是，插入默认的内容
+        else if (dynText == "2") {
+            let contents;
+            let apiDate = new Date().getDate();
+            let apiMonth = new Date().getMonth() + 1;
+            let apiYear = new Date().getFullYear();
+            if (apiDate < 10) {
+                apiDate = "0" + apiDate;
+            }
+            if (apiMonth < 10) {
+                apiMonth = "0" + apiMonth;
+            }
+            let fullDate = apiYear + "-" + apiMonth + "-" + apiDate;
+            console.log(fullDate);
+            $.get("https://sentence.iciba.com/index.php?c=dailysentence&m=getdetail&title="+fullDate,data => {
+                data.note = data.note.slice(0,-1);
+                data.note = data.note.replace(/，/g,"，^200");
+                data.note = data.note.replace(/。/g,"。^200");
+                data.note = data.note.replace(/？/g,"？^200");
+                data.note = data.note.replace(/！/g,"！^200");
+                data.note = data.note.replace(/；/g,"；^200");
+                contents = data.content.slice(0,-1) + "/" + data.note;
+                dynamicType(contents.split("/"),50,25);
+            },'jsonp');
+        }
         else {
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver +'/static/clickLove.js"></script>');
-            bodyInsert.append('<script src="//cdn.jsdelivr.net/gh/PikaSama/live2d-widget@latest/autoload.js"></script>');
+            dynamicType(["人生是逆流，^200也是随波逐流", "神机妙算皆徒劳，^200千般执念终成空", "七月初七，^100淮水竹亭，^100鞘笛相偎，^100无怨无悔"]);
         }
     }
-    // ----------
-    // --- 代码区 ---
-    // 监听调色盘主题和强调色的点击事件
-    paletteEvent.day(0);
-    paletteEvent.night(1);
-    paletteEvent.day(2);
-    paletteEvent.day(3);
-    paletteEvent.day(4);
-    paletteEvent.accent(5);
-    paletteEvent.accent(6);
-    paletteEvent.accent(7);
-    paletteEvent.accent(8);
-    paletteEvent.accent(9);
-    paletteEvent.accent(10);
-    paletteEvent.accent(11);
-    paletteEvent.accent(12);
-    paletteEvent.accent(13);
-    paletteEvent.accent(14);
-    paletteEvent.accent(15);
-    paletteEvent.accent(16);
-    paletteEvent.accent(17);
-    // 检测ua
-    checkUA();
-    // 加载配置
-    if (palette != null) {
-        loadconfig();
-    }
-    else {
-        await delay(1000,loadconfig);
-    }
-    // --------------
 })();
