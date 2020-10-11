@@ -206,6 +206,7 @@
 div.veditor-area i.ri-restart-line {
     font-size:140%;
     color:silver;
+    right: 2.4em;
     transition: all 0.5s;
 }
 

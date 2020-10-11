@@ -4,6 +4,7 @@
  License: GPL-3.0 License
  Description: Personal functions.
  */
+// 延迟函数
 function delay(ms,func) {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -14,6 +15,7 @@ function delay(ms,func) {
         },ms);
     });
 }
+// 动态文字，简化版
 function dynamicType(arr,ts,bs) {
     const options = {
         strings: arr,
@@ -28,6 +30,7 @@ function dynamicType(arr,ts,bs) {
     }
     const type = new Typed("#typedtext",options);
 }
+// 通知系统，简化版
 function customNtf(options) {
     let myntf = new NotificationFx({
         wrapper: document.body,
@@ -63,6 +66,7 @@ function confirmAnnounce(ld) {
         localStorage.setItem("announcement_date", ld);
     });
 }
+// 新人查阅指南后的通知
 async function checkedNotification(css,ver) {
     css.append('<link id="jelly" href="//cdn.jsdelivr.net/gh/PikaSama/shelter-images@' + ver + '/static/ns-style-growl.css" rel="stylesheet">');
     await delay(1600);

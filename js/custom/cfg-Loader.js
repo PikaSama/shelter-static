@@ -8,11 +8,9 @@
     await delay(500);
     // 新人标识
     const newviewer = localStorage.getItem("newbie");
-    // 插入css的地方
     const headInsert = $("head");
-    // 插入js的地方
     const bodyInsert = $("body");
-    // 调色盘位置
+    // 调色盘
     const palette = document.querySelector("is-palette2");
     // 静态资源版本
     const ver = "1.3.12";
@@ -108,13 +106,13 @@
         // 判断是否有配置文件且不是新人
         if (newviewer != null) {
             // 是，调用函数
+            listenerB();
             sidebar = localStorage.getItem("sidebar_widget_background");
             nightMode_And_Theme();
             widget();
             cEffect();
             l2d();
             dynamicTxt();
-            listenerB();
         }
         // 不是，插入默认的内容
         else {

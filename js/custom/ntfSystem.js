@@ -16,7 +16,6 @@
     const ld = "2020.8.3";
     // 静态资源版本
     const ver = "1.3.12";
-    // 插入css的地方
     const cssPlace = $("head");
     // 新人通知
     const newbientf = async () => {
@@ -32,13 +31,12 @@
         await delay(600);
         $(".ns-box.ns-other.ns-effect-thumbslider.ns-type-error .ns-box-inner").attr("style","width:340px;");
     }
-    // 如果是新人，显示新人通知
+    // 显示新人通知
     if (newv == null) {
         await newbientf();
     }
-    // 如果不是新人，调用函数
     else {
-        // 无已读公告日期或与最新公告日期不符，且不是新人，显示公告
+        // 判断条件，显示公告
         if ((ad == null || ad != ld) && newv != null) {
             announce(cssPlace,ver,lc,ld);
         }

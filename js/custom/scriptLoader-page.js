@@ -1,3 +1,9 @@
+/*
+ Author: Zorin
+ Github: https://github.com/PikaSama
+ License: GPL-3.0 License
+ Description: Personal scripts loader. (for pages)
+ */
 (()=>{
     let i = setInterval(()=>{
         if(typeof delay != "undefined"){
